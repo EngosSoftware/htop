@@ -1,0 +1,30 @@
+HTML to PDF converter
+
+Usage: htop [OPTIONS] [COMMAND]
+
+Commands:
+  single    Convert single HTML file to PDF file
+  multiple  Convert multiple HTML files to multiple PDF files
+  url       Convert single HTML page to PDF file
+  help      Print this message or the help of the given subcommand(s)
+
+Options:
+  -b, --print-background             Print the page background
+      --print-header-footer          Print the header and footer
+      --header <HEADER>              Set custom header
+      --header-file <HEADER_FILE>    Load custom header from file
+      --footer <FOOTER>              Set custom footer
+      --footer-file <FOOTER_FILE>    Load custom footer from file
+  -l, --landscape                    Set the paper orientation to landscape
+      --margin <MARGIN>              Set the margin
+  -p, --paper-format <FORMAT>        Set the paper format
+      --paper-width <PAPER_WIDTH>    Set the custom paper width
+      --paper-height <PAPER_HEIGHT>  Set the custom paper height
+      --ranges <RANGES>              Set the range of pages to print
+      --scale <SCALE>                Set printing scale
+  -v, --verbose                      Display printing details
+      --log-level <LEVEL>            Set the logging level
+      --no-crash-reports             Disable saving crash reports
+  -t, --timeout <TIMEOUT>            Set page load timeout in milliseconds
+  -h, --help                         Print help (see more with '--help')
+  -V, --version                      Print version

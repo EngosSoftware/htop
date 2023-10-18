@@ -1,0 +1,5 @@
+error: the argument '--paper-format <FORMAT>' cannot be used with '--paper-width <PAPER_WIDTH>'
+
+Usage: htop --paper-format <FORMAT>
+
+For more information, try '--help'.

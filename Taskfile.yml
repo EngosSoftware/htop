@@ -1,0 +1,95 @@
+version: '3'
+
+silent: true
+
+tasks:
+
+  bbt:
+    desc: Runs black-box tests
+    cmds:
+      - cmd: cargo build && cd bbt && ./run-bbt.sh ./tests && cd ..
+
+  bbtt:
+    desc: Runs black-box test in specified directory
+    cmds:
+      - cmd: cargo build && cd bbt && ./run-bbt.sh {{.CLI_ARGS}} && cd ..
+
+  bbttt:
+    desc: Runs black-box test in specified directory with tracing
+    cmds:
+      - cmd: cargo build && cd bbt && ./run-bbt.sh {{.CLI_ARGS}} trace && cd ..
+
+  build:
+    desc: Builds in debug mode
+    cmds:
+      - cmd: cargo build
+
+  clean:
+    desc: Cleans all targets
+    cmds:
+      - cmd: cargo clean
+
+  clippy:
+    desc: Runs clippy for all targets
+    cmds:
+      - cmd: cargo clippy --all-targets
+
+  cov:
+    desc: Runs code coverage using grcov
+    cmds:
+      - cmd: ./coverage.sh
+
+  doc:
+    desc: Generates documentation
+    cmds:
+      - cmd: cargo doc --no-deps
+
+  doc-open:
+    desc: Generates documentation and opens it in browser
+    cmds:
+      - cmd: cargo doc --no-deps --open
+
+  fmt:
+    desc: Runs code formatter
+    cmds:
+      - cmd: cargo +nightly fmt
+
+  test:
+    desc: Runs tests in debug mode
+    cmds:
+      - cmd: cargo test
+
+  help:
+    desc: Runs htop help option
+    cmds:
+      - cmd: cargo run -- -h
+
+  help-long:
+    desc: Runs htop help option
+    cmds:
+      - cmd: cargo run -- --help
+
+  help-single:
+    desc: Runs htop help option for `single` command
+    cmds:
+      - cmd: cargo run -- help single
+
+  help-multiple:
+    desc: Runs htop help option for `multiple` command
+    cmds:
+      - cmd: cargo run -- help multiple
+
+  install:
+    desc: Builds and installs release version
+    cmds:
+      - cmd: cargo +stable install htop --path=. --force
+
+  musl:
+    desc: Builds using the Linux MUSL target
+    cmds:
+      - cmd: cargo +nightly build --release --target=x86_64-unknown-linux-musl
+
+  run:
+    desc: Runs htop with provided arguments
+    cmds:
+      - cmd: cargo run -- {{.CLI_ARGS}}

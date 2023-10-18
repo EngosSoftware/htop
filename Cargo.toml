@@ -1,0 +1,21 @@
+[package]
+name = "htop"
+version = "0.1.6"
+authors = ["Dariusz Depta <wisbery@users.noreply.github.com>"]
+description = "HTML to PDF converter"
+documentation = "https://docs.rs/htop"
+repository = "https://github.com/wisbery/htop.git"
+keywords = ["html", "pdf", "headless", "chrome", "converter"]
+categories = ["command-line-utilities", "encoding"]
+license = "MIT OR Apache-2.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4.4.6", features = ["cargo"] }
+env_logger = "0.10.0"
+headless_chrome = "1.0.5"
+log = "0.4.20"
+
+[dev-dependencies]
+# dependency below is needed only for fixing minimal versions
+serde = "1.0.189"
