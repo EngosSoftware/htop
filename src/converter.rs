@@ -15,8 +15,16 @@ pub fn html_to_pdf(files: Files, pdf_printing_options: PdfPrintingOptions) -> Re
   let verbose = pdf_printing_options.verbose;
   let paper_size = pdf_printing_options.paper_size;
   let no_crash_reports = pdf_printing_options.no_crash_reports;
-  let arguments = if no_crash_reports { vec![OsStr::new("--disable-crash-reporter")] } else { vec![] };
-  let options = LaunchOptionsBuilder::default().args(arguments).build().map_err(|e| err_headless_chrome(e.to_string()))?;
+  let mut arguments = vec![OsStr::new("--disable-search-engine-choice-screen")];
+  if no_crash_reports {
+    arguments.push(OsStr::new("--disable-crash-reporter"))
+  }
+  let options = LaunchOptionsBuilder::default()
+    .headless(true)
+    .devtools(false)
+    .args(arguments)
+    .build()
+    .map_err(|e| err_headless_chrome(e.to_string()))?;
   let browser = Browser::new(options).map_err(|e| err_headless_chrome(e.to_string()))?;
   let tab = browser.new_tab().map_err(|e| err_headless_chrome(e.to_string()))?;
   if let Some(timeout) = pdf_printing_options.page_load_timout {
