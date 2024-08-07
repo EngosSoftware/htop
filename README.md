@@ -5,21 +5,25 @@
 ![build Linux][build-badge-linux]
 ![build Windows][build-badge-windows]
 ![build MacOs][build-badge-macos]
-[![MIT licensed][mit-badge]][mit-url]
-[![Apache 2.0 licensed][apache-badge]][apache-url]
-[![Contributor Covenant][coc-badge]](https://github.com/wisbery/htop/blob/main/CODE_OF_CONDUCT.md)
+[![MIT licensed][mit-badge]][mit-license-url]
+[![Apache 2.0 licensed][apache-badge]][apache-license-url]
+[![Contributor Covenant][cc-badge]][cc-url]
 
 [crates-badge]: https://img.shields.io/crates/v/htop.svg
 [crates-url]: https://crates.io/crates/htop
 [mit-badge]: https://img.shields.io/badge/License-MIT-blue.svg
-[mit-url]: https://github.com/wisbery/htop/blob/main/LICENSE-MIT
+[mit-url]: https://opensource.org/licenses/MIT
+[mit-license-url]: https://github.com/EngosSoftware/htop/blob/main/LICENSE-MIT
 [apache-badge]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
-[apache-url]: https://github.com/wisbery/htop/blob/main/LICENSE-APACHE
-[build-badge-linux]: https://github.com/wisbery/htop/actions/workflows/build-linux.yml/badge.svg
-[build-badge-windows]: https://github.com/wisbery/htop/actions/workflows/build-windows.yml/badge.svg
-[build-badge-macos]: https://github.com/wisbery/htop/actions/workflows/build-macos.yml/badge.svg
+[apache-url]: https://www.apache.org/licenses/LICENSE-2.0
+[apache-license-url]: https://github.com/EngosSoftware/htop/blob/main/LICENSE
+[apache-notice-url]: https://github.com/EngosSoftware/htop/blob/main/NOTICE
+[build-badge-linux]: https://github.com/EngosSoftware/htop/actions/workflows/build-linux.yml/badge.svg
+[build-badge-windows]: https://github.com/EngosSoftware/htop/actions/workflows/build-windows.yml/badge.svg
+[build-badge-macos]: https://github.com/EngosSoftware/htop/actions/workflows/build-macos.yml/badge.svg
 [coverage-badge]: https://img.shields.io/badge/Code%20coverage-100%25-green.svg
-[coc-badge]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
+[cc-badge]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
+[cc-url]: https://github.com/EngosSoftware/htop/blob/main/CODE_OF_CONDUCT.md
 
 ## Overview
 
@@ -29,7 +33,7 @@ Inspired by [html2pdf](https://crates.io/crates/html2pdf) crate.
 ## Installation
 
 ```
-$ cargo install htop
+cargo install htop
 ```
 
 ## Usage
@@ -37,13 +41,13 @@ $ cargo install htop
 Display short usage description:
 
 ```
-$ htop -h
+htop -h
 ```
 
 Display detailed usage description:
 
 ```
-$ htop --help
+htop --help
 ```
 
 ## Basic examples
@@ -51,29 +55,29 @@ $ htop --help
 Convert single HTML file into single PDF file:
 
 ```
-$ htop single input_file.html output_file.pdf
+htop single input_file.html output_file.pdf
 ```
 
 Convert multiple HTML files into multiple PDF files:
 
 ```
-$ htop multiple input_dir output_dir
+htop multiple input_dir output_dir
 ```
 
 Convert web-page into single PDF file:
 
 ```
-$ htop url https://dmntk.io
+htop url https://dmntk.io
 ```
 
-More examples can be found in [User Guide](https://github.com/wisbery/htop/blob/main/user_guide/README.md).
+More examples can be found in [user guide](https://github.com/EngosSoftware/htop/blob/main/user_guide/README.md).
 
 ## License
 
 Licensed under either of
 
-- [MIT license](https://opensource.org/licenses/MIT) ([LICENSE-MIT](https://github.com/wisbery/htop/blob/main/LICENSE-MIT)), or
-- [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0) ([LICENSE-APACHE](https://github.com/wisbery/htop/blob/main/LICENSE-APACHE))
+- [MIT license][mit-url] (see [LICENSE-MIT][mit-license-url]) or
+- [Apache License, Version 2.0][apache-url] (see [LICENSE][apache-license-url] and [NOTICE][apache-notice-url])
 
 at your option.
 

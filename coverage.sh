@@ -26,7 +26,7 @@ export RUSTFLAGS="-Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Co
 # run all unit tests
 cargo +nightly test
 
-# build binary before running blck-box tests
+# build binary before running black-box tests
 cargo +nightly build
 
 # run black-box
