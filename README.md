@@ -62,8 +62,6 @@ Display detailed description of a command:
 htop help <command>
 ```
 
----
-
 ## Basic examples
 
 Convert a single HTML file into a single PDF file:
@@ -83,7 +81,6 @@ Convert a single web page into a single PDF file:
 ```shell
 htop url https://dmntk.io
 ```
----
 
 ## Commands
 
@@ -98,8 +95,6 @@ Converts multiple input HTML files into multiple output PDF files.
 ### `url`
 
 Converts a single HTML page into a single PDF file.
-
----
 
 ## Troubleshooting
 
