@@ -1,6 +1,6 @@
 # linux-musl-x86_64
 
-name: Linux
+name: Linux musl
 
 on:
   push:
@@ -15,16 +15,15 @@ env:
 
 jobs:
   build:
-    name: kuku
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@nightly
+      - uses: dtolnay/rust-toolchain@stable
         with:
           targets: x86_64-unknown-linux-musl
       - run: cargo test
-      - run: cargo +nightly build --release --target=x86_64-unknown-linux-musl
+      - run: cargo build --release --target=x86_64-unknown-linux-musl
       - uses: actions/upload-artifact@v3
         with:
-          name: htop-linux
+          name: htop-linux-musl-x86_64
           path: target/x86_64-unknown-linux-musl/release/htop

@@ -49,7 +49,7 @@ Options:
           the longest paper edge is positioned in horizontal
           direction. The default paper orientation is portrait.
 
-      --margin <MARGIN>
+  -m, --margin <MARGIN>
           Sets the margin. The value of the margin
           should be specified like in CSS, e.g.:
             '0 12mm 3pt 4px' - sets the top margin to zero, right margin to 12mm,
@@ -80,14 +80,16 @@ Options:
           using CSS units, e.g.: '200mm', '29.7cm', '1200pt', etc.
           Allowed units are: cm, mm, Q, in, pc, pt, px.
 
-      --ranges <RANGES>
-          Sets the range of pages to print. Paper ranges to print,
-          one based, e.g., '1-5, 8, 11-13'.
+  -r, --ranges <RANGES>
+          Sets the range of pages to print.
+          Paper ranges start from 1, e.g.: '1-5, 8, 11-13'.
           Pages are printed in the document order.
 
-      --scale <SCALE>
-          Sets printing scale.
-          Scale of the webpage rendering. Defaults to 1.
+  -s, --scale <SCALE>
+          Sets the printing scale.
+          Scale should be specified as a number or as a percentage.
+          Accepted scales are in range from 0.1 to 2.0 (from 10% to 200%).
+          The default scale is 1.0 (100%).
 
   -v, --verbose
           Displays printing details. Prints to standard
@@ -95,12 +97,13 @@ Options:
 
       --log-level <LEVEL>
           Sets the logging level. Allowed logging levels are:
-            none (default),
+            none,
             error,
             warn,
             info,
             debug,
-            trace
+            trace.
+          The default logging level is 'none'.
 
       --no-crash-reports
           Disables saving crash reports. By default, Headless Chrome

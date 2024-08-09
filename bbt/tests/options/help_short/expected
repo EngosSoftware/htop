@@ -16,12 +16,12 @@ Options:
       --footer <FOOTER>              Set custom footer
       --footer-file <FOOTER_FILE>    Load custom footer from file
   -l, --landscape                    Set the paper orientation to landscape
-      --margin <MARGIN>              Set the margin
+  -m, --margin <MARGIN>              Set the margin
   -p, --paper-format <FORMAT>        Set the paper format
       --paper-width <PAPER_WIDTH>    Set the custom paper width
       --paper-height <PAPER_HEIGHT>  Set the custom paper height
-      --ranges <RANGES>              Set the range of pages to print
-      --scale <SCALE>                Set printing scale
+  -r, --ranges <RANGES>              Set the range of pages to print
+  -s, --scale <SCALE>                Set the printing scale
   -v, --verbose                      Display printing details
       --log-level <LEVEL>            Set the logging level
       --no-crash-reports             Disable saving crash reports

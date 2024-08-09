@@ -69,16 +69,6 @@ tasks:
     cmds:
       - cmd: cargo run -- --help
 
-  help-single:
-    desc: Runs htop help option for `single` command
-    cmds:
-      - cmd: cargo run -- help single
-
-  help-multiple:
-    desc: Runs htop help option for `multiple` command
-    cmds:
-      - cmd: cargo run -- help multiple
-
   install:
     desc: Builds and installs release version
     cmds:
@@ -87,7 +77,7 @@ tasks:
   musl:
     desc: Builds using the Linux MUSL target
     cmds:
-      - cmd: cargo +nightly build --release --target=x86_64-unknown-linux-musl
+      - cmd: cargo +stable build --release --target=x86_64-unknown-linux-musl
 
   run:
     desc: Runs htop with provided arguments

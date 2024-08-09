@@ -111,14 +111,16 @@ Allowed units are: cm, mm, Q, in, pc, pt, px."#;
 
 pub const HELP_RANGES: &str = r#"Set the range of pages to print"#;
 
-pub const LONG_HELP_RANGES: &str = r#"Sets the range of pages to print. Paper ranges to print,
-one based, e.g., '1-5, 8, 11-13'.
+pub const LONG_HELP_RANGES: &str = r#"Sets the range of pages to print.
+Paper ranges start from 1, e.g.: '1-5, 8, 11-13'.
 Pages are printed in the document order."#;
 
-pub const HELP_SCALE: &str = r#"Set printing scale"#;
+pub const HELP_SCALE: &str = r#"Set the printing scale"#;
 
-pub const LONG_HELP_SCALE: &str = r#"Sets printing scale.
-Scale of the webpage rendering. Defaults to 1."#;
+pub const LONG_HELP_SCALE: &str = r#"Sets the printing scale.
+Scale should be specified as a number or as a percentage.
+Accepted scales are in range from 0.1 to 2.0 (from 10% to 200%).
+The default scale is 1.0 (100%)."#;
 
 pub const HELP_MARGIN: &str = r#"Set the margin"#;
 
@@ -155,12 +157,13 @@ process is cancelled and an error is reported."#;
 pub const HELP_LOG_LEVEL: &str = r#"Set the logging level"#;
 
 pub const LONG_HELP_LOG_LEVEL: &str = r#"Sets the logging level. Allowed logging levels are:
-  none (default),
+  none,
   error,
   warn,
   info,
   debug,
-  trace"#;
+  trace.
+The default logging level is 'none'."#;
 
 pub const HELP_INPUT_FILE: &str = r#"Input HTML file (required)"#;
 
@@ -253,7 +256,7 @@ pub fn get_matches() -> ArgMatches {
         .display_order(2),
     )
     .arg(
-      arg!(--header <HEADER>)
+      arg!(--"header" <HEADER>)
         .help(HELP_HEADER)
         .long_help(LONG_HELP_HEADER)
         .action(ArgAction::Set)
@@ -267,7 +270,7 @@ pub fn get_matches() -> ArgMatches {
         .display_order(4),
     )
     .arg(
-      arg!(--footer <FOOTER>)
+      arg!(--"footer" <FOOTER>)
         .help(HELP_FOOTER)
         .long_help(LONG_HELP_FOOTER)
         .action(ArgAction::Set)
@@ -281,7 +284,7 @@ pub fn get_matches() -> ArgMatches {
         .display_order(6),
     )
     .arg(
-      arg!(--landscape)
+      arg!(--"landscape")
         .short('l')
         .help(HELP_LANDSCAPE)
         .long_help(LONG_HELP_LANDSCAPE)
@@ -289,7 +292,8 @@ pub fn get_matches() -> ArgMatches {
         .display_order(7),
     )
     .arg(
-      arg!(--margin <MARGIN>)
+      arg!(--"margin" <MARGIN>)
+        .short('m')
         .help(HELP_MARGIN)
         .long_help(LONG_HELP_MARGIN)
         .action(ArgAction::Set)
@@ -320,15 +324,23 @@ pub fn get_matches() -> ArgMatches {
         .requires("paper-width"),
     )
     .arg(
-      arg!(--ranges <RANGES>)
+      arg!(--"ranges" <RANGES>)
+        .short('r')
         .help(HELP_RANGES)
         .long_help(LONG_HELP_RANGES)
         .action(ArgAction::Set)
         .display_order(12),
     )
-    .arg(arg!(--scale <SCALE>).help(HELP_SCALE).long_help(LONG_HELP_SCALE).action(ArgAction::Set).display_order(13))
     .arg(
-      arg!(--verbose)
+      arg!(--"scale" <SCALE>)
+        .short('s')
+        .help(HELP_SCALE)
+        .long_help(LONG_HELP_SCALE)
+        .action(ArgAction::Set)
+        .display_order(13),
+    )
+    .arg(
+      arg!(--"verbose")
         .short('v')
         .help(HELP_VERBOSE)
         .long_help(LONG_HELP_VERBOSE)
