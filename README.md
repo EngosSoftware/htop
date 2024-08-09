@@ -28,10 +28,13 @@
 [htop]: https://github.com/EngosSoftware/htop
 [headless_chrome]: https://crates.io/crates/headless_chrome
 [html2pdf]: https://crates.io/crates/html2pdf
+[report a bug]: https://github.com/EngosSoftware/htop/issues
 
 ## Overview
 
 HTML to PDF converter based on [headless_chrome], inspired by [html2pdf].
+
+In case of any problems while using **[htop]**, please see the [Troubleshooting](#Troubleshooting) section or [report a bug].
 
 ## Installation
 
@@ -41,7 +44,7 @@ cargo install htop
 
 ## Usage
 
-Display short usage description:
+Display shortened usage description:
 
 ```shell
 htop -h
@@ -52,6 +55,14 @@ Display detailed usage description:
 ```shell
 htop --help
 ```
+
+Display detailed description of a command:
+
+```shell
+htop help <command>
+```
+
+---
 
 ## Basic examples
 
@@ -72,8 +83,23 @@ Convert a single web page into a single PDF file:
 ```shell
 htop url https://dmntk.io
 ```
+---
 
-More examples can be found in [user guide](https://github.com/EngosSoftware/htop/blob/main/user_guide/README.md).
+## Commands
+
+### `single`
+
+Converts a single input HTML file into a single output PDF file.
+
+### `multiple`
+
+Converts multiple input HTML files into multiple output PDF files.
+
+### `url`
+
+Converts a single HTML page into a single PDF file.
+
+---
 
 ## Troubleshooting
 
