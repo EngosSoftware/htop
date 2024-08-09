@@ -25,14 +25,17 @@
 [cc-badge]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
 [cc-url]: https://github.com/EngosSoftware/htop/blob/main/CODE_OF_CONDUCT.md
 
+[htop]: https://github.com/EngosSoftware/htop
+[headless_chrome]: https://crates.io/crates/headless_chrome
+[html2pdf]: https://crates.io/crates/html2pdf
+
 ## Overview
 
-HTML to PDF converter based on [headless_chrome](https://crates.io/crates/headless_chrome) crate.
-Inspired by [html2pdf](https://crates.io/crates/html2pdf) crate.
+HTML to PDF converter based on [headless_chrome], inspired by [html2pdf].
 
 ## Installation
 
-```
+```shell
 cargo install htop
 ```
 
@@ -40,37 +43,72 @@ cargo install htop
 
 Display short usage description:
 
-```
+```shell
 htop -h
 ```
 
 Display detailed usage description:
 
-```
+```shell
 htop --help
 ```
 
 ## Basic examples
 
-Convert single HTML file into single PDF file:
+Convert a single HTML file into a single PDF file:
 
-```
+```shell
 htop single input_file.html output_file.pdf
 ```
 
-Convert multiple HTML files into multiple PDF files:
+Convert multiple HTML files placed in input directory into multiple PDF files in output directory:
 
-```
-htop multiple input_dir output_dir
+```shell
+htop multiple input_directory output_directory
 ```
 
-Convert web-page into single PDF file:
+Convert a single web page into a single PDF file:
 
-```
+```shell
 htop url https://dmntk.io
 ```
 
 More examples can be found in [user guide](https://github.com/EngosSoftware/htop/blob/main/user_guide/README.md).
+
+## Troubleshooting
+
+### Printing PDF hangs forever
+
+When **htop** is used in a multiuser environment (or in cloud), it may happen that the printing process hangs forever.
+The reason is that in Linux the crash report is created in directory **/tmp/Crashpad**. 
+When another user have already used **htop**, then such directory already exists and the access rights
+are set only for the other user. [headless_chrome] hangs while trying to get access to this directory.
+
+The simplest workaround is to delete this directory before running **htop**:
+
+```shell
+sudo rm -rf /tmp/Crashpad 
+```
+
+This might not work when multiple **htop** instances are started simultaneously.
+
+To avoid creating the directory with crash reports, run all simultaneous instances of **htop** with ` --no-crash-reports` option:
+
+```shell
+htop --no-crash-reports url https://dmntk.io
+```
+
+### SELinux
+
+It might happen, that SELinux will prevent chrome from using the 'execheap' accesses on a process.
+For Fedora this bug was reported here: https://bugzilla.redhat.com/show_bug.cgi?id=2254434. 
+**VERY INSECURE** workaround is to call:
+
+```shell
+sudo setsebool -N selinuxuser_execheap 1
+```  
+
+See `man setsebool` for more details.  
 
 ## License
 
@@ -83,5 +121,6 @@ at your option.
 
 ## Contribution
 
+Any contributions to **[htop]** are greatly appreciated.
 All contributions intentionally submitted for inclusion in the work by you,
 shall be dual licensed as above, without any additional terms or conditions.
