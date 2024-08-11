@@ -56,7 +56,7 @@ Display detailed usage description:
 htop --help
 ```
 
-Display detailed description of a command:
+Display the detailed description of a selected command:
 
 ```shell
 htop help <command>
@@ -64,19 +64,19 @@ htop help <command>
 
 ## Basic examples
 
-Convert a single HTML file into a single PDF file:
+### Convert a single HTML file into a single PDF file
 
 ```shell
 htop single input_file.html output_file.pdf
 ```
 
-Convert multiple HTML files placed in input directory into multiple PDF files in output directory:
+### Convert multiple HTML files into multiple PDF files
 
 ```shell
 htop multiple input_directory output_directory
 ```
 
-Convert a single web page into a single PDF file:
+### Convert a single web page into a single PDF file
 
 ```shell
 htop url https://dmntk.io
