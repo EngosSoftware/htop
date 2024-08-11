@@ -2,7 +2,7 @@
 
 ## [v0.1.9](https://github.com/EngosSoftware/htop/tree/v0.1.9) (2024-08-11)
 
-[Full Changelog](https://github.com/EngosSoftware/htop/compare/v0.1.9...v0.1.8)
+[Full Changelog](https://github.com/EngosSoftware/htop/compare/v0.1.8...v0.1.9)
 
 **Closed issues:**
 
