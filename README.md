@@ -100,7 +100,6 @@ sudo rm -rf /tmp/Crashpad
 ```
 
 This might not work when multiple **htop** instances are started simultaneously.
-
 To avoid creating the directory with crash reports, run all simultaneous **htop** instances
 with the option `--no-crash-reports` set:
 
