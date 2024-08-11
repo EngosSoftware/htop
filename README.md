@@ -82,19 +82,9 @@ Convert a single web page into a single PDF file:
 htop url https://dmntk.io
 ```
 
-## Commands
+## User guide
 
-### `single`
-
-Converts a single input HTML file into a single output PDF file.
-
-### `multiple`
-
-Converts multiple input HTML files into multiple output PDF files.
-
-### `url`
-
-Converts a single HTML page into a single PDF file.
+A detailed user guide is currently being prepared.
 
 ## Troubleshooting
 
@@ -113,7 +103,8 @@ sudo rm -rf /tmp/Crashpad
 
 This might not work when multiple **htop** instances are started simultaneously.
 
-To avoid creating the directory with crash reports, run all simultaneous instances of **htop** with ` --no-crash-reports` option:
+To avoid creating the directory with crash reports,
+run all simultaneous instances of **htop** with ` --no-crash-reports` option:
 
 ```shell
 htop --no-crash-reports url https://dmntk.io
