@@ -1,6 +1,6 @@
 # apple-macos-arm64
 
-name: macOS ARM64
+name: MacOS ARM64
 
 on:
   push:
