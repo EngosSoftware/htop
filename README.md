@@ -102,7 +102,7 @@ sudo rm -rf /tmp/Crashpad
 This might not work when multiple **htop** instances are started simultaneously.
 
 To avoid creating the directory with crash reports,
-run all simultaneous instances of **htop** with ` --no-crash-reports` option:
+run all simultaneous instances of **htop** with `--no-crash-reports` option:
 
 ```shell
 htop --no-crash-reports url https://dmntk.io
