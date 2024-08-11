@@ -102,7 +102,7 @@ sudo rm -rf /tmp/Crashpad
 This might not work when multiple **htop** instances are started simultaneously.
 
 To avoid creating the directory with crash reports,
-run all simultaneous instances of **htop** with `--no-crash-reports` option:
+run all simultaneous instances of **htop** with `&#8209;&#8209;no&#8209;crash&#8209;reports` option:
 
 ```shell
 htop --no-crash-reports url https://dmntk.io
@@ -111,7 +111,8 @@ htop --no-crash-reports url https://dmntk.io
 ### SELinux
 
 It might happen, that SELinux will prevent chrome from using the 'execheap' accesses on a process.
-For Fedora this [bug was reported here](https://bugzilla.redhat.com/show_bug.cgi?id=2254434). 
+
+For Fedora Linux, this [bug was reported here](https://bugzilla.redhat.com/show_bug.cgi?id=2254434). 
 
 **VERY INSECURE** workaround is to call:
 
