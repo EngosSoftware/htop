@@ -111,7 +111,8 @@ htop --no-crash-reports url https://dmntk.io
 ### SELinux
 
 It might happen, that SELinux will prevent chrome from using the 'execheap' accesses on a process.
-For Fedora this bug was reported here: https://bugzilla.redhat.com/show_bug.cgi?id=2254434. 
+For Fedora this [bug was reported here](https://bugzilla.redhat.com/show_bug.cgi?id=2254434). 
+
 **VERY INSECURE** workaround is to call:
 
 ```shell
