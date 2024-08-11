@@ -44,25 +44,23 @@ cargo install htop
 
 ## Usage
 
-Display shortened usage description:
+### Display shortened usage description
 
 ```shell
 htop -h
 ```
 
-Display detailed usage description:
+### Display detailed usage description
 
 ```shell
 htop --help
 ```
 
-Display the detailed description of a selected command:
+### Display the detailed description of a selected command
 
 ```shell
 htop help <command>
 ```
-
-## Basic examples
 
 ### Convert a single HTML file into a single PDF file
 
