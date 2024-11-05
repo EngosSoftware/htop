@@ -1,6 +1,6 @@
 [package]
 name = "htop"
-version = "0.1.9"
+version = "0.2.0"
 authors = ["Dariusz Depta <depta@engos.de>"]
 description = "HTML to PDF converter"
 documentation = "https://docs.rs/htop"
@@ -11,7 +11,7 @@ license = "MIT OR Apache-2.0"
 edition = "2021"
 
 [dependencies]
-clap = { version = "4.5.13", features = ["cargo"] }
+clap = { version = "4.5.20", features = ["cargo"] }
 env_logger = "0.11.5"
-headless_chrome = "1.0.12"
+headless_chrome = "1.0.15"
 log = "0.4.22"

@@ -5,7 +5,7 @@ silent: true
 tasks:
 
   bbt:
-    desc: Runs black-box tests
+    desc: Runs all black-box tests
     cmds:
       - cmd: cargo build && cd bbt && ./run-bbt.sh ./tests && cd ..
 
