@@ -110,6 +110,12 @@ pub const LONG_HELP_PAPER_HEIGHT: &str = r#"Sets the custom paper height. Paper 
 using CSS units, e.g.: '200mm', '29.7cm', '1200pt', etc.
 Allowed units are: cm, mm, Q, in, pc, pt, px."#;
 
+pub const HELP_PAPER_SIZE: &str = r#"Set the custom paper size"#;
+
+pub const LONG_HELP_PAPER_SIZE: &str = r#"Sets the custom paper size. Paper size should be specified
+as two values separated by comma using CSS units, e.g.: '210mm,297mm', '21cm,29.7cm', etc.
+Allowed units are: cm, mm, Q, in, pc, pt, px."#;
+
 pub const HELP_RANGES: &str = r#"Set the range of pages to print"#;
 
 pub const LONG_HELP_RANGES: &str = r#"Sets the range of pages to print.
@@ -329,12 +335,19 @@ pub fn get_matches() -> ArgMatches {
         .requires("paper-width"),
     )
     .arg(
+      arg!(--"paper-size" <PAPER_SIZE>)
+        .help(HELP_PAPER_SIZE)
+        .long_help(LONG_HELP_PAPER_SIZE)
+        .action(ArgAction::Set)
+        .display_order(12),
+    )
+    .arg(
       arg!(--"ranges" <RANGES>)
         .short('r')
         .help(HELP_RANGES)
         .long_help(LONG_HELP_RANGES)
         .action(ArgAction::Set)
-        .display_order(12),
+        .display_order(13),
     )
     .arg(
       arg!(--"scale" <SCALE>)
@@ -342,29 +355,33 @@ pub fn get_matches() -> ArgMatches {
         .help(HELP_SCALE)
         .long_help(LONG_HELP_SCALE)
         .action(ArgAction::Set)
-        .display_order(13),
+        .display_order(14),
     )
+    .arg(arg!(--"jpg").help("a").long_help("b").action(ArgAction::SetTrue).display_order(15))
+    .arg(arg!(--"png").help("c").long_help("d").action(ArgAction::SetTrue).display_order(16))
+    .arg(arg!(--"webp").help("e").long_help("f").action(ArgAction::SetTrue).display_order(17))
+    .arg(arg!(--"window-size" <WINDOW_SIZE>).help("g").long_help("h").action(ArgAction::Set).display_order(18))
     .arg(
       arg!(--"verbose")
         .short('v')
         .help(HELP_VERBOSE)
         .long_help(LONG_HELP_VERBOSE)
         .action(ArgAction::SetTrue)
-        .display_order(14),
+        .display_order(20),
     )
     .arg(
       arg!(--"log-level" <LEVEL>)
         .help(HELP_LOG_LEVEL)
         .long_help(LONG_HELP_LOG_LEVEL)
         .action(ArgAction::Set)
-        .display_order(15),
+        .display_order(21),
     )
     .arg(
       arg!(--"no-crash-reports")
         .help(HELP_NO_CRASH_REPORTS)
         .long_help(LONG_HELP_NO_CRASH_REPORTS)
         .action(ArgAction::SetTrue)
-        .display_order(16),
+        .display_order(22),
     )
     .arg(
       arg!(--"timeout" <TIMEOUT>)
@@ -372,12 +389,36 @@ pub fn get_matches() -> ArgMatches {
         .help(HELP_PAGE_LOAD_TIMEOUT)
         .long_help(LONG_HELP_PAGE_LOAD_TIMEOUT)
         .action(ArgAction::Set)
-        .display_order(17),
+        .display_order(23),
     )
     .group(ArgGroup::new("headers").arg("header").arg("header-file"))
     .group(ArgGroup::new("footers").arg("footer").arg("footer-file"))
-    .group(ArgGroup::new("paper-widths").arg("paper-format").arg("paper-width"))
-    .group(ArgGroup::new("paper-heights").arg("paper-format").arg("paper-height"))
+    .group(ArgGroup::new("paper-widths").arg("paper-format").arg("paper-width").arg("paper-size"))
+    .group(ArgGroup::new("paper-heights").arg("paper-format").arg("paper-height").arg("paper-size"))
+    .group(ArgGroup::new("image-formats").arg("jpg").arg("png").arg("webp"))
+    .group(
+      ArgGroup::new("pdf-printing-only")
+        .arg("header")
+        .arg("header-file")
+        .arg("footer")
+        .arg("footer-file")
+        .arg("paper-format")
+        .arg("paper-width")
+        .arg("paper-height")
+        .arg("print-background")
+        .arg("scale")
+        .multiple(true)
+        .conflicts_with("image-printing-only"),
+    )
+    .group(
+      ArgGroup::new("image-printing-only")
+        .arg("jpg")
+        .arg("png")
+        .arg("webp")
+        .arg("window-size")
+        .multiple(true)
+        .conflicts_with("pdf-printing-only"),
+    )
     .subcommand(
       command!()
         .name(SUBCOMMAND_SINGLE)

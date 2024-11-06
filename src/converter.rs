@@ -5,7 +5,6 @@ use crate::errors::{err_headless_chrome, err_write_file, Result};
 use crate::options::{ImagePrintingOptions, PdfPrintingOptions};
 use crate::units::{inches_to_millimeters, inches_to_points, round1};
 use clap::crate_name;
-use headless_chrome::protocol::cdp::Page;
 use headless_chrome::protocol::cdp::Page::CaptureScreenshotFormatOption;
 use headless_chrome::{Browser, LaunchOptionsBuilder};
 use std::ffi::OsStr;
@@ -74,6 +73,7 @@ pub fn html_to_image(files: Files, image_printing_options: ImagePrintingOptions)
     .devtools(false)
     .args(arguments)
     .window_size(Some((1200, 1200)))
+    //.window_size(None)
     .build()
     .map_err(|e| err_headless_chrome(e.to_string()))?;
   let browser = Browser::new(options).map_err(|e| err_headless_chrome(e.to_string()))?;
@@ -84,15 +84,8 @@ pub fn html_to_image(files: Files, image_printing_options: ImagePrintingOptions)
   for (input_url, output_file_name) in &files {
     tab.navigate_to(input_url).map_err(|e| err_headless_chrome(e.to_string()))?;
     tab.wait_until_navigated().map_err(|e| err_headless_chrome(e.to_string()))?;
-    let viewport = Page::Viewport {
-      x: 0.0,
-      y: 0.0,
-      width: 1200.0,
-      height: 1200.0,
-      scale: 2.0,
-    };
     let image = tab
-      .capture_screenshot(CaptureScreenshotFormatOption::Jpeg, None, Some(viewport), true)
+      .capture_screenshot(CaptureScreenshotFormatOption::Png, None, None, true)
       .map_err(|e| err_headless_chrome(e.to_string()))?;
     fs::write(output_file_name, image).map_err(|e| err_write_file(output_file_name, e.to_string()))?;
     if verbose {
