@@ -32,7 +32,8 @@ tasks:
   clippy:
     desc: Runs clippy for all targets
     cmds:
-      - cmd: cargo clippy --all-targets
+      - cmd: cargo +stable clippy --all-targets
+      - cmd: cargo +nightly clippy --all-targets
 
   cov:
     desc: Runs code coverage using grcov

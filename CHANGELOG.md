@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.2.0](https://github.com/EngosSoftware/htop/tree/v0.2.0) (2024-11-06)
+
+[Full Changelog](https://github.com/EngosSoftware/htop/compare/v0.1.9...v0.2.0)
+
+**Closed issues:**
+
+- Report an error when invalid timeout is provided [\#7](https://github.com/EngosSoftware/htop/issues/7)
+
 ## [v0.1.9](https://github.com/EngosSoftware/htop/tree/v0.1.9) (2024-08-11)
 
 [Full Changelog](https://github.com/EngosSoftware/htop/compare/v0.1.8...v0.1.9)
