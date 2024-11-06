@@ -55,3 +55,14 @@ impl From<PdfPrintingOptions> for PrintToPdfOptions {
     }
   }
 }
+
+/// Image printing options.
+#[derive(Clone)]
+pub struct ImagePrintingOptions {
+  /// Flag indicating if printing process should be more talkative, `true` = more talkative.
+  pub verbose: bool,
+  /// Flag indicating if crash reporter should be disabled, `true` = disabled.
+  pub no_crash_reports: bool,
+  /// Page load timeout in milliseconds.
+  pub page_load_timout: Option<u64>,
+}

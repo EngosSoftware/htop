@@ -1,10 +1,10 @@
 //! # Application entry point
 
 use crate::cli::*;
-use crate::converter::html_to_pdf;
+use crate::converter::{html_to_image, html_to_pdf};
 use crate::defs::*;
 use crate::errors::Result;
-use crate::options::PdfPrintingOptions;
+use crate::options::{ImagePrintingOptions, PdfPrintingOptions};
 use clap::{crate_description, crate_name, crate_version};
 use std::fs;
 use std::path::Path;
@@ -26,6 +26,8 @@ fn main() -> Result<()> {
   init_logger(matches.get_one::<String>("log-level").cloned());
 
   let verbose = flag(&matches, "verbose");
+  let no_crash_reports = flag(&matches, "no-crash-reports");
+  let page_load_timout = value(&matches, "timeout")?;
 
   // prepare printing options
   let pdf_printing_options = PdfPrintingOptions {
@@ -39,8 +41,14 @@ fn main() -> Result<()> {
     header: file_content(&matches, "header", "header-file")?,
     footer: file_content(&matches, "footer", "footer-file")?,
     verbose,
-    no_crash_reports: flag(&matches, "no-crash-reports"),
-    page_load_timout: value(&matches, "timeout")?,
+    no_crash_reports,
+    page_load_timout,
+  };
+
+  let image_printing_options = ImagePrintingOptions {
+    verbose,
+    no_crash_reports,
+    page_load_timout,
   };
 
   // parse subcommands
@@ -100,7 +108,8 @@ fn main() -> Result<()> {
         "output.pdf".to_string()
       };
       // convert input HTML page into output PDF file
-      html_to_pdf(vec![(input_url, output_file_name)], pdf_printing_options)?;
+      //html_to_pdf(vec![(input_url, output_file_name)], pdf_printing_options)?;
+      html_to_image(vec![(input_url, output_file_name)], image_printing_options)?;
     }
     _ => {
       println!("{} {}\n\n{}\n", crate_name!(), crate_version!(), crate_description!());
