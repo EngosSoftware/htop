@@ -23,7 +23,7 @@ cargo clean
 # set instrumenting variables
 export CARGO_INCREMENTAL=0
 export RUSTDOCFLAGS="-Cpanic=abort"
-export RUSTFLAGS="-Cinstrument-coverage -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
+export RUSTFLAGS="-Cinstrument-coverage -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code=off -Coverflow-checks=off -Zpanic_abort_tests -Cpanic=abort"
 export LLVM_PROFILE_FILE="$WORKING_DIRECTORY/target/profraw/dsntk-%p-%m.profraw"
 
 # run all unit tests
@@ -54,7 +54,7 @@ grcov . \
       -t lcov \
       --branch \
       --ignore-not-existing \
-      --ignore "*cargo*" --ignore "*tests*" --ignore "*headless_chrome*" \
+      --ignore "*cargo*" --ignore "*tests*" --ignore "*target*" \
       -o ./target/lcov/lcov.info
 
 # generate coverage report
