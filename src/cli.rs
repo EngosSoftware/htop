@@ -5,10 +5,11 @@
 //-----------------------------------------------------------------------------
 
 use crate::defs::{PaperSize, MAX_PAPER_LENGTH, MIN_PAPER_LENGTH};
-use crate::errors::{err_invalid_paper_height, err_invalid_paper_width, err_read_file, Result};
+use crate::errors::{err_invalid_paper_height, err_invalid_paper_width, err_invalid_value, err_read_file, Result};
 use crate::paper::Paper;
 use crate::units::to_inches;
 use clap::{arg, command, crate_name, ArgAction, ArgGroup, ArgMatches};
+use std::fmt::Debug;
 use std::fs;
 use std::str::FromStr;
 
@@ -180,13 +181,17 @@ pub const HELP_INPUT_URL: &str = r#"Input page URL (required)"#;
 //-----------------------------------------------------------------------------
 
 /// Returns matched parsable value from command-line arguments.
-pub fn value<T: FromStr>(matches: &ArgMatches, id: &str) -> Option<T> {
+pub fn value<T>(matches: &ArgMatches, id: &str) -> Result<Option<T>>
+where
+  T: FromStr,
+  <T as FromStr>::Err: Debug,
+{
   if let Some(s) = matches.get_one::<String>(id).cloned() {
-    if let Ok(value) = s.parse::<T>() {
-      return Some(value);
-    }
+    let value = s.parse::<T>().map_err(|e| err_invalid_value(&s, &format!("{:?}", e)))?;
+    Ok(Some(value))
+  } else {
+    Ok(None)
   }
-  None
 }
 
 /// Returns the value of the flag taken from command-line argument matches.

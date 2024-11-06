@@ -40,7 +40,7 @@ fn main() -> Result<()> {
     footer: file_content(&matches, "footer", "footer-file")?,
     verbose,
     no_crash_reports: flag(&matches, "no-crash-reports"),
-    page_load_timout: value(&matches, "timeout"),
+    page_load_timout: value(&matches, "timeout")?,
   };
 
   // parse subcommands

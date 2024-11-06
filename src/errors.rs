@@ -26,7 +26,7 @@ impl HtopError {
 
 /// Creates invalid paper format error.
 pub fn err_invalid_paper_format(format_name: &str) -> HtopError {
-  HtopError::new(format!("invalid paper format '{}'", format_name))
+  HtopError::new(format!("invalid paper format '{format_name}'"))
 }
 
 /// Creates invalid paper width error.
@@ -39,9 +39,14 @@ pub fn err_invalid_paper_height(paper_height: f64) -> HtopError {
   HtopError::new(format!("paper height is out of range ({}..{} in): {} in", MIN_PAPER_LENGTH, MAX_PAPER_LENGTH, paper_height))
 }
 
+/// Creates invalid value error.
+pub fn err_invalid_value(value: &str, reason: &str) -> HtopError {
+  HtopError::new(format!("parsing value '{value}' failed with reason: {reason}"))
+}
+
 /// Creates an error with failure reason message from headless chrome.
 pub fn err_headless_chrome(reason: String) -> HtopError {
-  HtopError::new(format!("headless chrome failed with reason: {}", reason))
+  HtopError::new(format!("headless chrome failed with reason: {reason}"))
 }
 
 /// Creates an error with file writing failure reason.
