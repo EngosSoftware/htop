@@ -4,7 +4,7 @@ The `Tab` has a function named `capture_screenshot` that is supposed to return t
 
 The supported image formats are: PNG, JPG, WebP.
 
-New options:
+New options (for generating an image):
 
 - `   --jpg` exports image to JPG format,
 - `   --png` exports image to PNG format,
@@ -36,4 +36,3 @@ Conflicting options:
 - `    --paper-height`
 - `    --paper-size`
 - `-r, --ranges`
-
