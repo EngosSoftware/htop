@@ -21,7 +21,7 @@ Shared options (with PDF printing):
 - `-t --timeout` same behavior as for PDF printing,
 - `-s --scale` sets the scale of the image, the window/viewport size will be scaled and saved to the image.
 
-Conflicting options:
+Conflicting options (from PDF printing):
 
 - `-b, --print-background`
 - `    --print-header-footer`
