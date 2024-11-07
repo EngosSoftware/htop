@@ -2,10 +2,10 @@
 
 #******************************************************************************
 #
-# Take a screenshot of a single HTML page, save the image in JPEG format.
+# Take a screenshot of a single HTML page, save the image in WebP format.
 # The windows size is the default in headless Chrome.
-# The long option name --jpeg is used.
+# The long option name --webp is used.
 #
 #******************************************************************************
 
-htop --jpeg url https://engos.de actual.1 >> /dev/null 2>&1
+htop --webp url https://engos.de actual.1 >> /dev/null 2>&1

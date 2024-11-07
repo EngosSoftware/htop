@@ -2,10 +2,10 @@
 
 #******************************************************************************
 #
-# Take a screenshot of a single HTML page, save the image in JPEG format.
+# Take a screenshot of a single HTML page, save the image in WebP format.
 # The window size of the headless Chrome is set to custom value.
-# Short options -J and -w are used.
+# Short options -W and -w are used.
 #
 #******************************************************************************
 
-htop -Jw 1200,1200 url https://engos.de actual.1 >> /dev/null 2>&1
+htop -Ww 1200,1200 url https://engos.de actual.1 >> /dev/null 2>&1
