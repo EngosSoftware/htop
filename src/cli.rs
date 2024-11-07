@@ -140,6 +140,22 @@ should be specified like in CSS, e.g.:
   '15mm'           - sets all margins to 15mm.
 Allowed units are: cm, mm, Q, in, pc, pt, px."#;
 
+pub const HELP_JPG: &str = r#"Save a screenshot as a JPG image."#;
+
+pub const LONG_HELP_JPG: &str = r#"Save a screenshot as a JPG image."#;
+
+pub const HELP_PNG: &str = r#"Save a screenshot as a PNG image."#;
+
+pub const LONG_HELP_PNG: &str = r#"Save a screenshot as a PNG image."#;
+
+pub const HELP_WEBP: &str = r#"Save a screenshot as a WebP image."#;
+
+pub const LONG_HELP_WEBP: &str = r#"Save a screenshot as a WebP image."#;
+
+pub const HELP_WINDOW_SIZE: &str = r#"Set a window size for the screenshot."#;
+
+pub const LONG_HELP_WINDOW_SIZE: &str = r#"Set a window size for the screenshot."#;
+
 pub const HELP_VERBOSE: &str = r#"Display printing details"#;
 
 pub const LONG_HELP_VERBOSE: &str = r#"Displays printing details. Prints to standard
@@ -336,6 +352,7 @@ pub fn get_matches() -> ArgMatches {
     )
     .arg(
       arg!(--"paper-size" <PAPER_SIZE>)
+        .short('z')
         .help(HELP_PAPER_SIZE)
         .long_help(LONG_HELP_PAPER_SIZE)
         .action(ArgAction::Set)
@@ -357,10 +374,38 @@ pub fn get_matches() -> ArgMatches {
         .action(ArgAction::Set)
         .display_order(14),
     )
-    .arg(arg!(--"jpg").help("a").long_help("b").action(ArgAction::SetTrue).display_order(15))
-    .arg(arg!(--"png").help("c").long_help("d").action(ArgAction::SetTrue).display_order(16))
-    .arg(arg!(--"webp").help("e").long_help("f").action(ArgAction::SetTrue).display_order(17))
-    .arg(arg!(--"window-size" <WINDOW_SIZE>).help("g").long_help("h").action(ArgAction::Set).display_order(18))
+    .arg(
+      arg!(--"jpg")
+        .short('J')
+        .help(HELP_JPG)
+        .long_help(LONG_HELP_JPG)
+        .action(ArgAction::SetTrue)
+        .display_order(15),
+    )
+    .arg(
+      arg!(--"png")
+        .short('P')
+        .help(HELP_PNG)
+        .long_help(LONG_HELP_PNG)
+        .action(ArgAction::SetTrue)
+        .display_order(16),
+    )
+    .arg(
+      arg!(--"webp")
+        .short('W')
+        .help(HELP_WEBP)
+        .long_help(LONG_HELP_WEBP)
+        .action(ArgAction::SetTrue)
+        .display_order(17),
+    )
+    .arg(
+      arg!(--"window-size" <WINDOW_SIZE>)
+        .short('w')
+        .help(HELP_WINDOW_SIZE)
+        .long_help(LONG_HELP_WINDOW_SIZE)
+        .action(ArgAction::Set)
+        .display_order(18),
+    )
     .arg(
       arg!(--"verbose")
         .short('v')
