@@ -11,8 +11,11 @@ pub type Files = Vec<(String, String)>;
 /// Type alias for multiple margins.
 pub type Margins = (Option<f64>, Option<f64>, Option<f64>, Option<f64>);
 
-/// Type alias for paper size.
+/// Type alias for the paper size.
 pub type PaperSize = (Option<f64>, Option<f64>);
+
+/// Type alias for the window size.
+pub type WindowSize = (u32, u32);
 
 /// Type alias for scale.
 pub type Scale = Option<f64>;
@@ -28,6 +31,14 @@ pub const MIN_PAPER_LENGTH: f64 = 0.19;
 
 /// Maximum paper length in inches.
 pub const MAX_PAPER_LENGTH: f64 = 100.0;
+
+/// Type of the screenshot output format.
+#[derive(Copy, Clone)]
+pub enum ScreenshotFormat {
+  Jpeg,
+  Png,
+  Webp,
+}
 
 /// Converts margin definition into a tuple of values in inches.
 pub fn margin(opt_margin: Option<String>) -> Result<Margins> {

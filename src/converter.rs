@@ -1,8 +1,8 @@
 //! # HTML to PDF converter
 
-use crate::defs::Files;
+use crate::defs::{Files, ScreenshotFormat};
 use crate::errors::{err_headless_chrome, err_write_file, Result};
-use crate::options::{ImagePrintingOptions, PdfPrintingOptions};
+use crate::options::{PdfPrintingOptions, ScreenshotTakingOptions};
 use crate::units::{inches_to_millimeters, inches_to_points, round1};
 use clap::crate_name;
 use headless_chrome::protocol::cdp::Page::CaptureScreenshotFormatOption;
@@ -20,13 +20,13 @@ pub fn html_to_pdf(files: Files, pdf_printing_options: PdfPrintingOptions) -> Re
   if no_crash_reports {
     arguments.push(OsStr::new("--disable-crash-reporter"))
   }
-  let options = LaunchOptionsBuilder::default()
+  let launch_options = LaunchOptionsBuilder::default()
     .headless(true)
     .devtools(false)
     .args(arguments)
     .build()
     .map_err(|e| err_headless_chrome(e.to_string()))?;
-  let browser = Browser::new(options).map_err(|e| err_headless_chrome(e.to_string()))?;
+  let browser = Browser::new(launch_options).map_err(|e| err_headless_chrome(e.to_string()))?;
   let tab = browser.new_tab().map_err(|e| err_headless_chrome(e.to_string()))?;
   if let Some(timeout) = pdf_printing_options.page_load_timout {
     tab.set_default_timeout(Duration::from_millis(timeout));
@@ -61,31 +61,32 @@ pub fn html_to_pdf(files: Files, pdf_printing_options: PdfPrintingOptions) -> Re
 }
 
 /// Converts `HTML` input files into image output files.
-pub fn html_to_image(files: Files, image_printing_options: ImagePrintingOptions) -> Result<()> {
-  let verbose = image_printing_options.verbose;
-  let no_crash_reports = image_printing_options.no_crash_reports;
+pub fn html_to_screenshot(files: Files, screenshot_taking_options: ScreenshotTakingOptions) -> Result<()> {
+  let output_format = screenshot_taking_options.output_format;
+  let windows_size: Option<(u32, u32)> = screenshot_taking_options.window_size.into();
+  let verbose = screenshot_taking_options.verbose;
+  let no_crash_reports = screenshot_taking_options.no_crash_reports;
   let mut arguments = vec![OsStr::new("--disable-search-engine-choice-screen")];
   if no_crash_reports {
     arguments.push(OsStr::new("--disable-crash-reporter"))
   }
-  let options = LaunchOptionsBuilder::default()
+  let launch_options = LaunchOptionsBuilder::default()
     .headless(true)
     .devtools(false)
     .args(arguments)
-    .window_size(Some((1200, 1200)))
-    //.window_size(None)
+    .window_size(windows_size)
     .build()
     .map_err(|e| err_headless_chrome(e.to_string()))?;
-  let browser = Browser::new(options).map_err(|e| err_headless_chrome(e.to_string()))?;
+  let browser = Browser::new(launch_options).map_err(|e| err_headless_chrome(e.to_string()))?;
   let tab = browser.new_tab().map_err(|e| err_headless_chrome(e.to_string()))?;
-  if let Some(timeout) = image_printing_options.page_load_timout {
+  if let Some(timeout) = screenshot_taking_options.page_load_timout {
     tab.set_default_timeout(Duration::from_millis(timeout));
   }
   for (input_url, output_file_name) in &files {
     tab.navigate_to(input_url).map_err(|e| err_headless_chrome(e.to_string()))?;
     tab.wait_until_navigated().map_err(|e| err_headless_chrome(e.to_string()))?;
     let image = tab
-      .capture_screenshot(CaptureScreenshotFormatOption::Png, None, None, true)
+      .capture_screenshot(output_format.into(), None, None, true)
       .map_err(|e| err_headless_chrome(e.to_string()))?;
     fs::write(output_file_name, image).map_err(|e| err_write_file(output_file_name, e.to_string()))?;
     if verbose {

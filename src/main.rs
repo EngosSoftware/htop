@@ -1,10 +1,10 @@
 //! # Application entry point
 
 use crate::cli::*;
-use crate::converter::{html_to_image, html_to_pdf};
+use crate::converter::{html_to_pdf, html_to_screenshot};
 use crate::defs::*;
 use crate::errors::Result;
-use crate::options::{ImagePrintingOptions, PdfPrintingOptions};
+use crate::options::{PdfPrintingOptions, ScreenshotTakingOptions};
 use clap::{crate_description, crate_name, crate_version};
 use std::fs;
 use std::path::Path;
@@ -45,7 +45,7 @@ fn main() -> Result<()> {
     page_load_timout,
   };
 
-  let image_printing_options = ImagePrintingOptions {
+  let image_printing_options = ScreenshotTakingOptions {
     verbose,
     no_crash_reports,
     page_load_timout,
@@ -109,7 +109,7 @@ fn main() -> Result<()> {
       };
       // convert input HTML page into output PDF file
       //html_to_pdf(vec![(input_url, output_file_name)], pdf_printing_options)?;
-      html_to_image(vec![(input_url, output_file_name)], image_printing_options)?;
+      html_to_screenshot(vec![(input_url, output_file_name)], image_printing_options)?;
     }
     _ => {
       println!("{} {}\n\n{}\n", crate_name!(), crate_version!(), crate_description!());

@@ -1,9 +1,10 @@
-//! # PDF printing options
+//! # Several options for printing PDF or taking a screenshot.
 
-use crate::defs::{Margins, PaperSize};
+use crate::defs::{Margins, PaperSize, ScreenshotFormat, WindowSize};
+use headless_chrome::protocol::cdp::Page::CaptureScreenshotFormatOption;
 use headless_chrome::types::PrintToPdfOptions;
 
-/// PDF printing options.
+/// Options for printing a PDF.
 #[derive(Clone)]
 pub struct PdfPrintingOptions {
   /// Paper mode, `true` = landscape, `false` = portrait.
@@ -24,7 +25,7 @@ pub struct PdfPrintingOptions {
   pub header: Option<String>,
   /// Footer HTML template.
   pub footer: Option<String>,
-  /// Flag indicating if printing process should be more talkative, `true` = more talkative.
+  /// Flag indicating if this process should be more talkative, `true` = more talkative.
   pub verbose: bool,
   /// Flag indicating if crash reporter should be disabled, `true` = disabled.
   pub no_crash_reports: bool,
@@ -56,13 +57,28 @@ impl From<PdfPrintingOptions> for PrintToPdfOptions {
   }
 }
 
-/// Image printing options.
+/// Options for taking a screenshot.
 #[derive(Clone)]
-pub struct ImagePrintingOptions {
-  /// Flag indicating if printing process should be more talkative, `true` = more talkative.
+pub struct ScreenshotTakingOptions {
+  /// Output format for the screenshot.
+  pub output_format: ScreenshotFormat,
+  /// Requested window size of the headless browser when taking the screenshot.
+  pub window_size: Option(WindowSize),
+  /// Flag indicating if this process should be more talkative, `true` = more talkative.
   pub verbose: bool,
   /// Flag indicating if crash reporter should be disabled, `true` = disabled.
   pub no_crash_reports: bool,
   /// Page load timeout in milliseconds.
   pub page_load_timout: Option<u64>,
+}
+
+impl From<ScreenshotFormat> for CaptureScreenshotFormatOption {
+  /// Converts [ScreenshotFormat] into [CaptureScreenshotFormatOption].
+  fn from(screenshot_format: ScreenshotFormat) -> Self {
+    match screenshot_format {
+      ScreenshotFormat::Jpeg => CaptureScreenshotFormatOption::Jpeg,
+      ScreenshotFormat::Png => CaptureScreenshotFormatOption::Png,
+      ScreenshotFormat::Webp => CaptureScreenshotFormatOption::Webp,
+    }
+  }
 }
