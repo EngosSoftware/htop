@@ -1,35 +1,21 @@
 //! # HTML to PDF converter
 
-use crate::defs::{Files, ScreenshotFormat};
+use crate::defs::{Files, ScreenshotFormat, Timeout, WindowSize};
 use crate::errors::{err_headless_chrome, err_write_file, Result};
 use crate::options::{PdfPrintingOptions, ScreenshotTakingOptions};
 use crate::units::{inches_to_millimeters, inches_to_points, round1};
 use clap::crate_name;
-use headless_chrome::{Browser, LaunchOptionsBuilder};
+use headless_chrome::{Browser, LaunchOptionsBuilder, Tab};
 use std::ffi::OsStr;
 use std::fs;
+use std::sync::Arc;
 use std::time::Duration;
 
 /// Converts `HTML` input files into `PDF` output files.
 pub fn html_to_pdf(files: Files, pdf_printing_options: PdfPrintingOptions) -> Result<()> {
   let verbose = pdf_printing_options.verbose;
   let paper_size = pdf_printing_options.paper_size;
-  let no_crash_reports = pdf_printing_options.no_crash_reports;
-  let mut arguments = vec![OsStr::new("--disable-search-engine-choice-screen")];
-  if no_crash_reports {
-    arguments.push(OsStr::new("--disable-crash-reporter"))
-  }
-  let launch_options = LaunchOptionsBuilder::default()
-    .headless(true)
-    .devtools(false)
-    .args(arguments)
-    .build()
-    .map_err(|e| err_headless_chrome(e.to_string()))?;
-  let browser = Browser::new(launch_options).map_err(|e| err_headless_chrome(e.to_string()))?;
-  let tab = browser.new_tab().map_err(|e| err_headless_chrome(e.to_string()))?;
-  if let Some(timeout) = pdf_printing_options.page_load_timout {
-    tab.set_default_timeout(Duration::from_millis(timeout));
-  }
+  let tab = get_browser_tab(pdf_printing_options.no_crash_reports, None, pdf_printing_options.page_load_timout)?;
   for (input_url, output_file_name) in &files {
     if verbose {
       println!("[{}] Printing file {}", crate_name!(), input_url);
@@ -62,25 +48,12 @@ pub fn html_to_pdf(files: Files, pdf_printing_options: PdfPrintingOptions) -> Re
 /// Converts `HTML` input files into image output files.
 pub fn html_to_screenshot(files: Files, screenshot_taking_options: ScreenshotTakingOptions) -> Result<()> {
   let output_format = screenshot_taking_options.output_format.unwrap_or(ScreenshotFormat::Png);
-  let windows_size = screenshot_taking_options.window_size;
   let verbose = screenshot_taking_options.verbose;
-  let no_crash_reports = screenshot_taking_options.no_crash_reports;
-  let mut arguments = vec![OsStr::new("--disable-search-engine-choice-screen")];
-  if no_crash_reports {
-    arguments.push(OsStr::new("--disable-crash-reporter"))
-  }
-  let launch_options = LaunchOptionsBuilder::default()
-    .headless(true)
-    .devtools(false)
-    .args(arguments)
-    .window_size(windows_size)
-    .build()
-    .map_err(|e| err_headless_chrome(e.to_string()))?;
-  let browser = Browser::new(launch_options).map_err(|e| err_headless_chrome(e.to_string()))?;
-  let tab = browser.new_tab().map_err(|e| err_headless_chrome(e.to_string()))?;
-  if let Some(timeout) = screenshot_taking_options.page_load_timout {
-    tab.set_default_timeout(Duration::from_millis(timeout));
-  }
+  let tab = get_browser_tab(
+    screenshot_taking_options.no_crash_reports,
+    screenshot_taking_options.window_size,
+    screenshot_taking_options.page_load_timeout,
+  )?;
   for (input_url, output_file_name) in &files {
     tab.navigate_to(input_url).map_err(|e| err_headless_chrome(e.to_string()))?;
     tab.wait_until_navigated().map_err(|e| err_headless_chrome(e.to_string()))?;
@@ -93,4 +66,24 @@ pub fn html_to_screenshot(files: Files, screenshot_taking_options: ScreenshotTak
     }
   }
   Ok(())
+}
+
+fn get_browser_tab(no_crash_reports: bool, window_size: WindowSize, timeout: Timeout) -> Result<Arc<Tab>> {
+  let mut arguments = vec![OsStr::new("--disable-search-engine-choice-screen")];
+  if no_crash_reports {
+    arguments.push(OsStr::new("--disable-crash-reporter"))
+  }
+  let launch_options = LaunchOptionsBuilder::default()
+    .headless(true)
+    .devtools(false)
+    .args(arguments)
+    .window_size(window_size)
+    .build()
+    .map_err(|e| err_headless_chrome(e.to_string()))?;
+  let browser = Browser::new(launch_options).map_err(|e| err_headless_chrome(e.to_string()))?;
+  let tab = browser.new_tab().map_err(|e| err_headless_chrome(e.to_string()))?;
+  if let Some(timeout) = timeout {
+    tab.set_default_timeout(Duration::from_millis(timeout));
+  }
+  Ok(tab)
 }

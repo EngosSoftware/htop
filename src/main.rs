@@ -60,7 +60,7 @@ fn main() -> Result<()> {
     window_size: window_size(string(&matches, "window-size"))?,
     verbose,
     no_crash_reports,
-    page_load_timout,
+    page_load_timeout: page_load_timout,
   };
 
   let process_files = |files: Files| -> Result<()> {

@@ -1,6 +1,6 @@
 //! # Several options for printing PDF or taking a screenshot.
 
-use crate::defs::{Margins, PaperSize, ScreenshotFormat, WindowSize};
+use crate::defs::{Margins, PaperSize, ScreenshotFormat, Timeout, WindowSize};
 use headless_chrome::protocol::cdp::Page::CaptureScreenshotFormatOption;
 use headless_chrome::types::PrintToPdfOptions;
 
@@ -30,7 +30,7 @@ pub struct PdfPrintingOptions {
   /// Flag indicating if crash reporter should be disabled, `true` = disabled.
   pub no_crash_reports: bool,
   /// Page load timeout in milliseconds.
-  pub page_load_timout: Option<u64>,
+  pub page_load_timout: Timeout,
 }
 
 impl From<PdfPrintingOptions> for PrintToPdfOptions {
@@ -69,7 +69,7 @@ pub struct ScreenshotTakingOptions {
   /// Flag indicating if crash reporter should be disabled, `true` = disabled.
   pub no_crash_reports: bool,
   /// Page load timeout in milliseconds.
-  pub page_load_timout: Option<u64>,
+  pub page_load_timeout: Option<u64>,
 }
 
 impl From<ScreenshotFormat> for CaptureScreenshotFormatOption {

@@ -20,6 +20,9 @@ pub type WindowSize = Option<(u32, u32)>;
 /// Type alias for scale.
 pub type Scale = Option<f64>;
 
+/// Type alias for timeout.
+pub type Timeout = Option<u64>;
+
 /// Extension of PDF files.
 pub const PDF_EXTENSION: &str = "pdf";
 
