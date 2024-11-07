@@ -27,7 +27,7 @@ fn main() -> Result<()> {
 
   let verbose = flag(&matches, "verbose");
   let no_crash_reports = flag(&matches, "no-crash-reports");
-  let page_load_timout = value(&matches, "timeout")?;
+  let page_load_timout = timeout(&matches, "timeout")?;
 
   // prepare printing options
   let pdf_printing_options = PdfPrintingOptions {

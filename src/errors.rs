@@ -39,11 +39,6 @@ pub fn err_invalid_paper_height(paper_height: f64) -> HtopError {
   HtopError::new(format!("paper height is out of range ({MIN_PAPER_LENGTH}..{MAX_PAPER_LENGTH} in): {paper_height} in"))
 }
 
-/// Creates invalid value error.
-pub fn err_invalid_value(value: &str, reason: &str) -> HtopError {
-  HtopError::new(format!("parsing value '{value}' failed with reason: {reason}"))
-}
-
 /// Creates an error with failure reason message from headless chrome.
 pub fn err_headless_chrome(reason: String) -> HtopError {
   HtopError::new(format!("headless chrome failed with reason: {reason}"))
@@ -79,6 +74,11 @@ pub fn err_invalid_length(length: &str) -> HtopError {
 /// Creates an error when invalid number was encountered.
 pub fn err_invalid_number(number: &str) -> HtopError {
   HtopError::new(format!("invalid number: {number}"))
+}
+
+/// Creates an error when invalid timeout was encountered.
+pub fn err_invalid_timeout(timeout: &str) -> HtopError {
+  HtopError::new(format!("invalid timeout: {timeout}"))
 }
 
 /// Creates an error when invalid width was encountered.
