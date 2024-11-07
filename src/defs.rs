@@ -1,6 +1,6 @@
 //! # Common definitions
 
-use crate::errors::{err_canonicalize, err_file_name, err_invalid_margin, err_invalid_number, Result};
+use crate::errors::*;
 use crate::units::inches;
 use std::env;
 use std::path::Path;
@@ -15,7 +15,7 @@ pub type Margins = (Option<f64>, Option<f64>, Option<f64>, Option<f64>);
 pub type PaperSize = (Option<f64>, Option<f64>);
 
 /// Type alias for the window size.
-pub type WindowSize = (u32, u32);
+pub type WindowSize = Option<(u32, u32)>;
 
 /// Type alias for scale.
 pub type Scale = Option<f64>;
@@ -63,6 +63,22 @@ pub fn scale(opt_scale: Option<String>) -> Result<Scale> {
       Ok(Some(str_to_f64(prefix)? / 100.0))
     } else {
       Ok(Some(str_to_f64(&scale)?))
+    }
+  } else {
+    Ok(None)
+  }
+}
+
+/// Converts window size definition into a tuple of unsigned integers.
+pub fn window_size(opt_window_size: Option<String>) -> Result<WindowSize> {
+  if let Some(window_size) = opt_window_size {
+    let parts = window_size.split(',').map(|s| s.trim().to_string()).collect::<Vec<String>>();
+    if parts.len() == 2 {
+      let width = parts[0].parse::<u32>().map_err(|_| err_invalid_width(&parts[0]))?;
+      let height = parts[1].parse::<u32>().map_err(|_| err_invalid_height(&parts[1]))?;
+      Ok(Some((width, height)))
+    } else {
+      Err(err_invalid_window_size(&window_size))
     }
   } else {
     Ok(None)

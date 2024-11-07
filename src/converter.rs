@@ -5,7 +5,6 @@ use crate::errors::{err_headless_chrome, err_write_file, Result};
 use crate::options::{PdfPrintingOptions, ScreenshotTakingOptions};
 use crate::units::{inches_to_millimeters, inches_to_points, round1};
 use clap::crate_name;
-use headless_chrome::protocol::cdp::Page::CaptureScreenshotFormatOption;
 use headless_chrome::{Browser, LaunchOptionsBuilder};
 use std::ffi::OsStr;
 use std::fs;
@@ -62,8 +61,8 @@ pub fn html_to_pdf(files: Files, pdf_printing_options: PdfPrintingOptions) -> Re
 
 /// Converts `HTML` input files into image output files.
 pub fn html_to_screenshot(files: Files, screenshot_taking_options: ScreenshotTakingOptions) -> Result<()> {
-  let output_format = screenshot_taking_options.output_format;
-  let windows_size: Option<(u32, u32)> = screenshot_taking_options.window_size.into();
+  let output_format = screenshot_taking_options.output_format.unwrap_or(ScreenshotFormat::Png);
+  let windows_size = screenshot_taking_options.window_size;
   let verbose = screenshot_taking_options.verbose;
   let no_crash_reports = screenshot_taking_options.no_crash_reports;
   let mut arguments = vec![OsStr::new("--disable-search-engine-choice-screen")];

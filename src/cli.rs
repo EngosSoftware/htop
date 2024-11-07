@@ -140,9 +140,9 @@ should be specified like in CSS, e.g.:
   '15mm'           - sets all margins to 15mm.
 Allowed units are: cm, mm, Q, in, pc, pt, px."#;
 
-pub const HELP_JPG: &str = r#"Save a screenshot as a JPG image."#;
+pub const HELP_JPEG: &str = r#"Save a screenshot as a JPEG image."#;
 
-pub const LONG_HELP_JPG: &str = r#"Save a screenshot as a JPG image."#;
+pub const LONG_HELP_JPEG: &str = r#"Save a screenshot as a JPEG image."#;
 
 pub const HELP_PNG: &str = r#"Save a screenshot as a PNG image."#;
 
@@ -375,10 +375,10 @@ pub fn get_matches() -> ArgMatches {
         .display_order(14),
     )
     .arg(
-      arg!(--"jpg")
+      arg!(--"jpeg")
         .short('J')
-        .help(HELP_JPG)
-        .long_help(LONG_HELP_JPG)
+        .help(HELP_JPEG)
+        .long_help(LONG_HELP_JPEG)
         .action(ArgAction::SetTrue)
         .display_order(15),
     )
@@ -440,7 +440,7 @@ pub fn get_matches() -> ArgMatches {
     .group(ArgGroup::new("footers").arg("footer").arg("footer-file"))
     .group(ArgGroup::new("paper-widths").arg("paper-format").arg("paper-width").arg("paper-size"))
     .group(ArgGroup::new("paper-heights").arg("paper-format").arg("paper-height").arg("paper-size"))
-    .group(ArgGroup::new("image-formats").arg("jpg").arg("png").arg("webp"))
+    .group(ArgGroup::new("image-formats").arg("jpeg").arg("png").arg("webp"))
     .group(
       ArgGroup::new("pdf-printing-only")
         .arg("header")
@@ -457,7 +457,7 @@ pub fn get_matches() -> ArgMatches {
     )
     .group(
       ArgGroup::new("image-printing-only")
-        .arg("jpg")
+        .arg("jpeg")
         .arg("png")
         .arg("webp")
         .arg("window-size")

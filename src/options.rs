@@ -61,9 +61,9 @@ impl From<PdfPrintingOptions> for PrintToPdfOptions {
 #[derive(Clone)]
 pub struct ScreenshotTakingOptions {
   /// Output format for the screenshot.
-  pub output_format: ScreenshotFormat,
+  pub output_format: Option<ScreenshotFormat>,
   /// Requested window size of the headless browser when taking the screenshot.
-  pub window_size: Option(WindowSize),
+  pub window_size: WindowSize,
   /// Flag indicating if this process should be more talkative, `true` = more talkative.
   pub verbose: bool,
   /// Flag indicating if crash reporter should be disabled, `true` = disabled.
