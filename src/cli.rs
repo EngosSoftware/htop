@@ -232,10 +232,11 @@ pub fn file_content(matches: &ArgMatches, id: &str, file_id: &str) -> Result<Opt
 }
 
 /// Converts paper format definitions into a tuple of values in inches.
-pub fn paper(matches: &ArgMatches, paper_format_id: &str, paper_width_id: &str, paper_height_id: &str, verbose: bool) -> Result<PaperSize> {
+pub fn paper(matches: &ArgMatches, paper_format_id: &str, paper_width_id: &str, paper_height_id: &str, paper_size_id: &str, verbose: bool) -> Result<PaperSize> {
   let opt_paper_format = string(matches, paper_format_id);
   let opt_paper_width = string(matches, paper_width_id);
   let opt_paper_height = string(matches, paper_height_id);
+  let opt_paper_size = string(matches, paper_size_id);
   if let Some(paper_format) = opt_paper_format {
     let paper = Paper::new(paper_format.as_str().try_into()?);
     if verbose {
@@ -252,6 +253,15 @@ pub fn paper(matches: &ArgMatches, paper_format_id: &str, paper_width_id: &str, 
       return Err(err_invalid_paper_height(height));
     }
     Ok((Some(width), Some(height)))
+  } else if let Some(paper_size) = opt_paper_size {
+    let parts = paper_size.split(',').map(|s| s.trim().to_string()).collect::<Vec<String>>();
+    if parts.len() != 2 {
+      Err(err_invalid_paper_size(&paper_size))
+    } else {
+      let width = to_inches(&parts[0])?;
+      let height = to_inches(&parts[1])?;
+      Ok((Some(width), Some(height)))
+    }
   } else {
     Ok((None, None))
   }
