@@ -1,14 +1,12 @@
-# apple-macos-arm64
+# Apple macOS ARM64
 
-name: MacOS ARM64
+name: macOS ARM64
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+      - releases/**
 
 env:
   CARGO_TERM_COLOR: always
@@ -21,8 +19,8 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: aarch64-apple-darwin
-      - run: cargo build --release --target=aarch64-apple-darwin
+      - run: cargo +stable build --release --target=aarch64-apple-darwin
       - uses: actions/upload-artifact@v3
         with:
-          name: htop-macos-arm64
+          name: htop-apple-macos-arm64
           path: target/aarch64-apple-darwin/release/htop
