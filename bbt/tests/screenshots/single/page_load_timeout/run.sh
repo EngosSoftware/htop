@@ -2,9 +2,10 @@
 
 #******************************************************************************
 #
-# Convert single HTML page into single PDF file with default name.
+# HTML page has infinite loop.
+# Stops loading the page after specified timeout.
+# No screenshot is taken.
 #
 #******************************************************************************
 
-htop url https://engos.de >> /dev/null 2>&1
-mv output.pdf actual.1
+htop -J -t 500 single index.html 2>&1

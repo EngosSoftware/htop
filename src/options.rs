@@ -1,9 +1,10 @@
-//! # PDF printing options
+//! # Several options for printing PDF or taking a screenshot.
 
-use crate::defs::{Margins, PaperSize};
+use crate::defs::{Margins, PaperSize, ScreenshotFormat, Timeout, WindowSize};
+use headless_chrome::protocol::cdp::Page::CaptureScreenshotFormatOption;
 use headless_chrome::types::PrintToPdfOptions;
 
-/// PDF printing options.
+/// Options for printing a PDF.
 #[derive(Clone)]
 pub struct PdfPrintingOptions {
   /// Paper mode, `true` = landscape, `false` = portrait.
@@ -24,12 +25,12 @@ pub struct PdfPrintingOptions {
   pub header: Option<String>,
   /// Footer HTML template.
   pub footer: Option<String>,
-  /// Flag indicating if printing process should be more talkative, `true` = more talkative.
+  /// Flag indicating if this process should be more talkative, `true` = more talkative.
   pub verbose: bool,
   /// Flag indicating if crash reporter should be disabled, `true` = disabled.
   pub no_crash_reports: bool,
   /// Page load timeout in milliseconds.
-  pub page_load_timout: Option<u64>,
+  pub page_load_timout: Timeout,
 }
 
 impl From<PdfPrintingOptions> for PrintToPdfOptions {
@@ -52,6 +53,32 @@ impl From<PdfPrintingOptions> for PrintToPdfOptions {
       footer_template: value.footer,
       prefer_css_page_size: None,
       transfer_mode: None,
+    }
+  }
+}
+
+/// Options for taking a screenshot.
+#[derive(Clone)]
+pub struct ScreenshotTakingOptions {
+  /// Output format for the screenshot.
+  pub output_format: Option<ScreenshotFormat>,
+  /// Requested window size of the headless browser when taking the screenshot.
+  pub window_size: WindowSize,
+  /// Flag indicating if this process should be more talkative, `true` = more talkative.
+  pub verbose: bool,
+  /// Flag indicating if crash reporter should be disabled, `true` = disabled.
+  pub no_crash_reports: bool,
+  /// Page load timeout in milliseconds.
+  pub page_load_timeout: Option<u64>,
+}
+
+impl From<ScreenshotFormat> for CaptureScreenshotFormatOption {
+  /// Converts [ScreenshotFormat] into [CaptureScreenshotFormatOption].
+  fn from(screenshot_format: ScreenshotFormat) -> Self {
+    match screenshot_format {
+      ScreenshotFormat::Jpeg => CaptureScreenshotFormatOption::Jpeg,
+      ScreenshotFormat::Png => CaptureScreenshotFormatOption::Png,
+      ScreenshotFormat::Webp => CaptureScreenshotFormatOption::Webp,
     }
   }
 }

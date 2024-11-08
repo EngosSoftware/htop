@@ -2,9 +2,8 @@
 
 #******************************************************************************
 #
-# Convert single HTML page into single PDF file with default name.
+# Take a screenshot of a single HTML file and save as PNG image.
 #
 #******************************************************************************
 
-htop url https://engos.de >> /dev/null 2>&1
-mv output.pdf actual.1
+htop -P single H_000010.html actual.1 >> /dev/null 2>&1

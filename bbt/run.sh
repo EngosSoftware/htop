@@ -12,7 +12,6 @@ PASSED=0
 FAILED=0
 FAILURE=0
 PERCENT=0.7
-MARKER=255044462d312e340a25
 
 #******************************************************************************
 # Increments passed tests counter.
@@ -59,7 +58,7 @@ function compare_using_diff () {
 #
 #******************************************************************************
 function compare_using_biff () {
-  biff -p $PERCENT -m $MARKER "$1" "$2"
+  biff -p $PERCENT "$1" "$2"
   RESULT=$?
   if [ $RESULT -ne 0 ]; then
     FAILURE=1

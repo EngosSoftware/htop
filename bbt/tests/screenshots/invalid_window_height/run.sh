@@ -2,9 +2,9 @@
 
 #******************************************************************************
 #
-# Convert single HTML page into single PDF file with default name.
+# The height in --window-size argument is invalid,
+# because it should be an integer.
 #
 #******************************************************************************
 
-htop url https://engos.de >> /dev/null 2>&1
-mv output.pdf actual.1
+htop -W --window-size=1200,1200cm url https://engos.de 2>&1

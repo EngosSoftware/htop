@@ -20,8 +20,13 @@ Options:
   -p, --paper-format <FORMAT>        Set the paper format
       --paper-width <PAPER_WIDTH>    Set the custom paper width
       --paper-height <PAPER_HEIGHT>  Set the custom paper height
+  -z, --paper-size <PAPER_SIZE>      Set the custom paper size
   -r, --ranges <RANGES>              Set the range of pages to print
   -s, --scale <SCALE>                Set the printing scale
+  -J, --jpeg                         Save a screenshot as a JPEG image.
+  -P, --png                          Save a screenshot as a PNG image.
+  -W, --webp                         Save a screenshot as a WebP image.
+  -w, --window-size <WINDOW_SIZE>    Set a window size for the screenshot.
   -v, --verbose                      Display printing details
       --log-level <LEVEL>            Set the logging level
       --no-crash-reports             Disable saving crash reports

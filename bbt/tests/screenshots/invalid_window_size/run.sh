@@ -2,9 +2,9 @@
 
 #******************************************************************************
 #
-# Convert single HTML page into single PDF file with default name.
+# The --window-size argument is invalid,
+# because two integers should be separated by a colon.
 #
 #******************************************************************************
 
-htop url https://engos.de >> /dev/null 2>&1
-mv output.pdf actual.1
+htop --jpeg --window-size=1200-1200 url https://engos.de 2>&1

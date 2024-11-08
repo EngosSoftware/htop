@@ -2,9 +2,8 @@
 
 #******************************************************************************
 #
-# Convert single HTML page into single PDF file with default name.
+# Take a screenshot of non existing HTML page.
 #
 #******************************************************************************
 
-htop url https://engos.de >> /dev/null 2>&1
-mv output.pdf actual.1
+htop -J url https://www.non-existing-web-page-123456789.com 2>&1

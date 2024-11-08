@@ -1,10 +1,10 @@
 //! # Application entry point
 
 use crate::cli::*;
-use crate::converter::html_to_pdf;
+use crate::converter::{html_to_pdf, html_to_screenshot};
 use crate::defs::*;
 use crate::errors::Result;
-use crate::options::PdfPrintingOptions;
+use crate::options::{PdfPrintingOptions, ScreenshotTakingOptions};
 use clap::{crate_description, crate_name, crate_version};
 use std::fs;
 use std::path::Path;
@@ -26,6 +26,8 @@ fn main() -> Result<()> {
   init_logger(matches.get_one::<String>("log-level").cloned());
 
   let verbose = flag(&matches, "verbose");
+  let no_crash_reports = flag(&matches, "no-crash-reports");
+  let page_load_timout = timeout(&matches, "timeout")?;
 
   // prepare printing options
   let pdf_printing_options = PdfPrintingOptions {
@@ -39,8 +41,36 @@ fn main() -> Result<()> {
     header: file_content(&matches, "header", "header-file")?,
     footer: file_content(&matches, "footer", "footer-file")?,
     verbose,
-    no_crash_reports: flag(&matches, "no-crash-reports"),
-    page_load_timout: value(&matches, "timeout")?,
+    no_crash_reports,
+    page_load_timout,
+  };
+
+  let output_format = if flag(&matches, "jpeg") {
+    Some(ScreenshotFormat::Jpeg)
+  } else if flag(&matches, "png") {
+    Some(ScreenshotFormat::Png)
+  } else if flag(&matches, "webp") {
+    Some(ScreenshotFormat::Webp)
+  } else {
+    None
+  };
+
+  let screenshot_taking_options = ScreenshotTakingOptions {
+    output_format,
+    window_size: window_size(string(&matches, "window-size"))?,
+    verbose,
+    no_crash_reports,
+    page_load_timeout: page_load_timout,
+  };
+
+  let process_files = |files: Files| -> Result<()> {
+    if output_format.is_some() {
+      // take screenshots
+      html_to_screenshot(files, screenshot_taking_options)
+    } else {
+      // print PDF
+      html_to_pdf(files, pdf_printing_options)
+    }
   };
 
   // parse subcommands
@@ -57,8 +87,7 @@ fn main() -> Result<()> {
       } else {
         replace_ext(input_file_path)
       };
-      // convert input HTML file into output PDF file
-      html_to_pdf(vec![(input_file_url, output_file_name)], pdf_printing_options)?;
+      process_files(vec![(input_file_url, output_file_name)])?;
     }
     Some((SUBCOMMAND_MULTIPLE, m)) => {
       let mut files: Files = vec![];
@@ -86,8 +115,7 @@ fn main() -> Result<()> {
           }
         }
       }
-      // convert input HTML files into output PDF files
-      html_to_pdf(files, pdf_printing_options)?;
+      process_files(files)?;
     }
     Some((SUBCOMMAND_URL, m)) => {
       // input page URL is required
@@ -99,8 +127,7 @@ fn main() -> Result<()> {
       } else {
         "output.pdf".to_string()
       };
-      // convert input HTML page into output PDF file
-      html_to_pdf(vec![(input_url, output_file_name)], pdf_printing_options)?;
+      process_files(vec![(input_url, output_file_name)])?;
     }
     _ => {
       println!("{} {}\n\n{}\n", crate_name!(), crate_version!(), crate_description!());

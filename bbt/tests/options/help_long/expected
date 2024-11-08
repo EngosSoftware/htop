@@ -80,6 +80,11 @@ Options:
           using CSS units, e.g.: '200mm', '29.7cm', '1200pt', etc.
           Allowed units are: cm, mm, Q, in, pc, pt, px.
 
+  -z, --paper-size <PAPER_SIZE>
+          Sets the custom paper size. Paper size should be specified
+          as two values separated by comma using CSS units, e.g.: '210mm,297mm', '21cm,29.7cm', etc.
+          Allowed units are: cm, mm, Q, in, pc, pt, px.
+
   -r, --ranges <RANGES>
           Sets the range of pages to print.
           Paper ranges start from 1, e.g.: '1-5, 8, 11-13'.
@@ -90,6 +95,18 @@ Options:
           Scale should be specified as a number or as a percentage.
           Accepted scales are in range from 0.1 to 2.0 (from 10% to 200%).
           The default scale is 1.0 (100%).
+
+  -J, --jpeg
+          Save a screenshot as a JPEG image.
+
+  -P, --png
+          Save a screenshot as a PNG image.
+
+  -W, --webp
+          Save a screenshot as a WebP image.
+
+  -w, --window-size <WINDOW_SIZE>
+          Set a window size for the screenshot.
 
   -v, --verbose
           Displays printing details. Prints to standard
