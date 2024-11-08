@@ -1,360 +1,379 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="UTF-8">
-    <title>Decision Table</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap">
-    <style>
+<head>
+  <meta charset="UTF-8">
+  <title>Decision Table</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap">
+  <style>
       @media print {
-        body {
-          font-size: 12px;
-        }
-      
-        svg {
-          box-shadow: unset;
-          width: 100%;
-        }
-      
-        .diagram-section {
-          grid-template-columns: 0 auto 0;
-        }
+          body {
+              font-size: 12px;
+          }
+
+          svg {
+              box-shadow: unset;
+              width: 100%;
+          }
+
+          .diagram-section {
+              grid-template-columns: 0 auto 0;
+          }
       }
+
       @media screen {
-        body {
-          font-size: 20px;
-          margin: 10px;
-        }
-      
-        svg {
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-        }
-      
-        .diagram-section {
-          grid-template-columns: auto 80% auto;
-        }
+          body {
+              font-size: 20px;
+              margin: 10px;
+          }
+
+          svg {
+              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+          }
+
+          .diagram-section {
+              grid-template-columns: auto 80% auto;
+          }
       }
+
       body {
-        font-family: "Barlow", sans-serif;
-        font-weight: 300;
-        background-color: #ffffff;
+          font-family: "Barlow", sans-serif;
+          font-weight: 300;
+          background-color: #ffffff;
       }
-      
+
       section {
-        display: block;
+          display: block;
       }
-      
+
       svg {
-        stroke: black;
-        stroke-width: 1;
-        fill: white;
-        color: black;
-        font-family: "Barlow Condensed", sans-serif;
-        font-weight: 400;
-        font-size: 20px;
-        overflow: hidden;
-        user-select: none;
+          stroke: black;
+          stroke-width: 1;
+          fill: white;
+          color: black;
+          font-family: "Barlow Condensed", sans-serif;
+          font-weight: 400;
+          font-size: 20px;
+          overflow: hidden;
+          user-select: none;
       }
-      
+
       h1 {
-        font-size: 1.4em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 600;
-        color: #ffffff;
-        background-color: #002f56;
-        text-align: left;
-        padding: 8px 20px;
-        margin: 0 0 8px 0;
+          font-size: 1.4em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 600;
+          color: #ffffff;
+          background-color: #002f56;
+          text-align: left;
+          padding: 8px 20px;
+          margin: 0 0 8px 0;
       }
-      
+
       h2 {
-        font-size: 1.2em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 600;
-        background-color: #d8ecff;
-        text-align: left;
-        padding: 8px 20px;
-        margin: 0;
+          font-size: 1.2em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 600;
+          background-color: #d8ecff;
+          text-align: left;
+          padding: 8px 20px;
+          margin: 0;
       }
-      
+
       h3 {
-        font-size: 1.2em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 400;
-        background-color: #ffffff;
-        text-align: center;
-        padding: 12px 20px 4px 20px;
-        margin: 0;
+          font-size: 1.2em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 400;
+          background-color: #ffffff;
+          text-align: center;
+          padding: 12px 20px 4px 20px;
+          margin: 0;
       }
-      
+
       strong {
-        font-weight: 600;
+          font-weight: 600;
       }
-      
+
       .diagram-section {
-        display: grid;
+          display: grid;
       }
-      
+
       .diagram-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 5px;
-        width: 100%;
-        break-inside: avoid;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 5px;
+          width: 100%;
+          break-inside: avoid;
       }
-      
+
       .diagram-title {
-        font-size: 1.2em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 400;
-        text-align: center;
-        padding: 12px 12px 4px 12px;
-        margin: 0;
+          font-size: 1.2em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 400;
+          text-align: center;
+          padding: 12px 12px 4px 12px;
+          margin: 0;
       }
-      
+
       .model-element-container {
-        padding: 20px 0 0 20px;
-        margin: 0;
+          padding: 20px 0 0 20px;
+          margin: 0;
       }
-      
+
       .model-element-name {
-        font-size: 1.2em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 600;
-        display: inline-block;
+          font-size: 1.2em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 600;
+          display: inline-block;
       }
-      
+
       .model-element-type {
-        font-size: 1em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 300;
-        display: inline-block;
+          font-size: 1em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 300;
+          display: inline-block;
       }
-      
+
       .variable-details-container {
-        display: flex;
-        flex-direction: column;
-        align-content: flex-start;
-        break-inside: avoid;
-        padding: 12px 0 12px 30px;
-        margin: 0;
+          display: flex;
+          flex-direction: column;
+          align-content: flex-start;
+          break-inside: avoid;
+          padding: 12px 0 12px 30px;
+          margin: 0;
       }
-      
+
       .variable-details-heading {
-        font-size: 1em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 600;
-        text-align: left;
-        padding: 0 0 4px 0;
-        margin: 0;
+          font-size: 1em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 600;
+          text-align: left;
+          padding: 0 0 4px 0;
+          margin: 0;
       }
-      
+
       .variable-details-properties {
-        display: grid;
-        grid-template-columns: auto auto;
-        grid-gap: 2px;
-        background-color: #b6b6b6;
-        border: 2px solid #b6b6b6;
-        align-self: start;
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-gap: 2px;
+          background-color: #b6b6b6;
+          border: 2px solid #b6b6b6;
+          align-self: start;
       }
-      
+
       .variable-details-property-name {
-        font-size: 1em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 300;
-        text-align: right;
-        padding: 4px 10px 4px 10px;
-        margin: 0;
-        background-color: #e1e1e1;
+          font-size: 1em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 300;
+          text-align: right;
+          padding: 4px 10px 4px 10px;
+          margin: 0;
+          background-color: #e1e1e1;
       }
-      
+
       .variable-details-property-value {
-        font-size: 1em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 500;
-        text-align: left;
-        padding: 4px 10px 4px 10px;
-        margin: 0;
-        background-color: #ffffff;
+          font-size: 1em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 500;
+          text-align: left;
+          padding: 4px 10px 4px 10px;
+          margin: 0;
+          background-color: #ffffff;
       }
-      
+
       .variable-details-property-value-type {
-        font-size: 1em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 600;
-        font-style: italic;
-        text-align: left;
-        padding: 4px 10px 4px 10px;
-        margin: 0;
-        background-color: #ffffff;
+          font-size: 1em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 600;
+          font-style: italic;
+          text-align: left;
+          padding: 4px 10px 4px 10px;
+          margin: 0;
+          background-color: #ffffff;
       }
-      
+
       .description-container {
-        margin: 10px 30px 10px 30px;
-        padding: 0 0 0 8px;
-        border-left: 3px solid #ffac41;
+          margin: 10px 30px 10px 30px;
+          padding: 0 0 0 8px;
+          border-left: 3px solid #ffac41;
       }
-      
+
       .description {
-        font-size: 1em;
-        font-family: "Barlow", sans-serif;
-        font-weight: 300;
-        margin: 0;
-        padding: 0;
+          font-size: 1em;
+          font-family: "Barlow", sans-serif;
+          font-weight: 300;
+          margin: 0;
+          padding: 0;
       }
+
       .description p {
-        padding: 0;
-        margin: 0;
+          padding: 0;
+          margin: 0;
       }
+
       .description ol {
-        margin: 4px 0;
+          margin: 4px 0;
       }
+
       .description ul {
-        margin: 4px 0;
+          margin: 4px 0;
       }
-      
+
       .expression-instance-container {
-        display: flex;
-        flex-direction: column;
-        align-content: flex-start;
-        break-inside: avoid;
-        padding: 12px 0 12px 30px;
-        margin: 0;
+          display: flex;
+          flex-direction: column;
+          align-content: flex-start;
+          break-inside: avoid;
+          padding: 12px 0 12px 30px;
+          margin: 0;
       }
-      
+
       .literal-expression {
-        font-size: 0.8em;
-        font-family: "JetBrains Mono", monospace;
-        font-weight: 400;
-        text-align: left;
-        padding: 8px 20px;
-        margin: 0;
-        border: 1px solid #9b9b9b;
-        color: blueviolet;
-        align-self: flex-start;
+          font-size: 0.8em;
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          text-align: left;
+          padding: 8px 20px;
+          margin: 0;
+          border: 1px solid #9b9b9b;
+          color: blueviolet;
+          align-self: flex-start;
       }
-      
+
       .decision-table {
-        display: flex;
-        flex-direction: column;
-        align-content: flex-start;
-        color: black;
-        break-inside: avoid;
-        font-weight: 300;
+          display: flex;
+          flex-direction: column;
+          align-content: flex-start;
+          color: black;
+          break-inside: avoid;
+          font-weight: 300;
       }
+
       .decision-table .information-item-name {
-        font-weight: 400;
-        border: 1px solid #525252;
-        background-color: #efefef;
-        align-self: flex-start;
-        position: relative;
-        top: 1px;
-        padding: 2px 4px;
+          font-weight: 400;
+          border: 1px solid #525252;
+          background-color: #efefef;
+          align-self: flex-start;
+          position: relative;
+          top: 1px;
+          padding: 2px 4px;
       }
+
       .decision-table .grid-container {
-        display: flex;
-        flex-direction: row;
+          display: flex;
+          flex-direction: row;
       }
+
       .decision-table .grid-body {
-        display: grid;
-        grid-gap: 1px;
-        background-color: #525252;
-        color: #444;
-        border: 1px solid #525252;
+          display: grid;
+          grid-gap: 1px;
+          background-color: #525252;
+          color: #444;
+          border: 1px solid #525252;
       }
+
       .decision-table .box, .decision-table .annotation-entry, .decision-table .annotation-allowed-values, .decision-table .annotation-label, .decision-table .output-entry, .decision-table .output-allowed-values, .decision-table .output-component, .decision-table .output-label, .decision-table .input-entry, .decision-table .input-allowed-values, .decision-table .input-expression, .decision-table .rule-number, .decision-table .hit-policy {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #fafafa;
-        color: black;
-        border-radius: 0;
-        padding: 4px 4px;
-        text-align: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #fafafa;
+          color: black;
+          border-radius: 0;
+          padding: 4px 4px;
+          text-align: center;
       }
+
       .decision-table .vertical-double-line {
-        width: 2px;
-        background-color: #ffffff;
+          width: 2px;
+          background-color: #ffffff;
       }
+
       .decision-table .horizontal-double-line {
-        height: 2px;
-        background-color: #ffffff;
+          height: 2px;
+          background-color: #ffffff;
       }
+
       .decision-table .hit-policy {
-        align-items: unset;
-        color: white;
-        background-color: #ffb25b;
-        font-weight: 500;
+          align-items: unset;
+          color: white;
+          background-color: #ffb25b;
+          font-weight: 500;
       }
+
       .decision-table .rule-number {
-        color: white;
-        background-color: #ff6300;
-        font-weight: 500;
+          color: white;
+          background-color: #ff6300;
+          font-weight: 500;
       }
+
       .decision-table .input-expression {
-        font-weight: 500;
-        background-color: #96c1e3;
+          font-weight: 500;
+          background-color: #96c1e3;
       }
+
       .decision-table .input-allowed-values {
-        font-weight: 400;
-        color: #ffffff;
-        background-color: #9a9a9a;
+          font-weight: 400;
+          color: #ffffff;
+          background-color: #9a9a9a;
       }
+
       .decision-table .output-label {
-        font-weight: 500;
-        background-color: #e8b4d1;
+          font-weight: 500;
+          background-color: #e8b4d1;
       }
+
       .decision-table .output-component {
-        font-weight: 500;
-        background-color: #fadbeb;
+          font-weight: 500;
+          background-color: #fadbeb;
       }
+
       .decision-table .output-allowed-values {
-        font-weight: 400;
-        color: #ffffff;
-        background-color: #9a9a9a;
+          font-weight: 400;
+          color: #ffffff;
+          background-color: #9a9a9a;
       }
+
       .decision-table .annotation-label {
-        font-weight: 500;
-        background-color: #c1d9c0;
+          font-weight: 500;
+          background-color: #c1d9c0;
       }
-    </style>
-  </head>
-  <body>
-    <h1>Decision Table</h1>
-    <div class="decision-table">
-      <div class="grid-container">
-        <div class="grid-body" style="grid-template-columns: auto auto auto auto;">
-          <div class="horizontal-double-line" style="grid-column: 1 / span 4; grid-row: 2 / span 1;"></div>
-          <div class="vertical-double-line" style="grid-column: 2 / span 1; grid-row: 1 / span 9;"></div>
-          <div class="hit-policy" style="grid-row: span 1;">C</div>
-          <div class="output-component">&nbsp;</div>
-          <div class="output-component">&nbsp;</div>
-          <div class="rule-number">1</div>
-          <div class="output-entry">"Monday"</div>
-          <div class="output-entry">1</div>
-          <div class="rule-number">2</div>
-          <div class="output-entry">"Tuesday"</div>
-          <div class="output-entry">2</div>
-          <div class="rule-number">3</div>
-          <div class="output-entry">"Wednesday"</div>
-          <div class="output-entry">3</div>
-          <div class="rule-number">4</div>
-          <div class="output-entry">"Thursday"</div>
-          <div class="output-entry">4</div>
-          <div class="rule-number">5</div>
-          <div class="output-entry">"Friday"</div>
-          <div class="output-entry">5</div>
-          <div class="rule-number">6</div>
-          <div class="output-entry">"Saturday"</div>
-          <div class="output-entry">6</div>
-          <div class="rule-number">7</div>
-          <div class="output-entry">"Sunday"</div>
-          <div class="output-entry">7</div>
-        </div>
-      </div>
+  </style>
+</head>
+<body>
+<h1>Decision Table</h1>
+<div class="decision-table">
+  <div class="grid-container">
+    <div class="grid-body" style="grid-template-columns: auto auto auto auto;">
+      <div class="horizontal-double-line" style="grid-column: 1 / span 4; grid-row: 2 / span 1;"></div>
+      <div class="vertical-double-line" style="grid-column: 2 / span 1; grid-row: 1 / span 9;"></div>
+      <div class="hit-policy" style="grid-row: span 1;">C</div>
+      <div class="output-component">&nbsp;</div>
+      <div class="output-component">&nbsp;</div>
+      <div class="rule-number">1</div>
+      <div class="output-entry">"Monday"</div>
+      <div class="output-entry">1</div>
+      <div class="rule-number">2</div>
+      <div class="output-entry">"Tuesday"</div>
+      <div class="output-entry">2</div>
+      <div class="rule-number">3</div>
+      <div class="output-entry">"Wednesday"</div>
+      <div class="output-entry">3</div>
+      <div class="rule-number">4</div>
+      <div class="output-entry">"Thursday"</div>
+      <div class="output-entry">4</div>
+      <div class="rule-number">5</div>
+      <div class="output-entry">"Friday"</div>
+      <div class="output-entry">5</div>
+      <div class="rule-number">6</div>
+      <div class="output-entry">"Saturday"</div>
+      <div class="output-entry">6</div>
+      <div class="rule-number">7</div>
+      <div class="output-entry">"Sunday"</div>
+      <div class="output-entry">7</div>
     </div>
-  </body>
+  </div>
+</div>
+</body>
 </html>
