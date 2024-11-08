@@ -77,7 +77,7 @@ htop multiple input_directory output_directory
 ### Convert a single web page into a single PDF file
 
 ```shell
-htop url https://dmntk.io
+htop url https://decision-toolkit.org
 ```
 
 ## User guide
@@ -104,7 +104,7 @@ To avoid creating the directory with crash reports, run all simultaneous **htop*
 with the option `--no-crash-reports` set:
 
 ```shell
-htop --no-crash-reports url https://dmntk.io
+htop --no-crash-reports url https://decision-toolkit.org
 ```
 
 ### SELinux
