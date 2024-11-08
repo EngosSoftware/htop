@@ -100,3 +100,8 @@ pub fn err_invalid_margin(margin: &str) -> HtopError {
 pub fn err_invalid_window_size(window_size: &str) -> HtopError {
   HtopError::new(format!("invalid window size: {window_size}"))
 }
+
+/// Creates an error when invalid paper size was encountered.
+pub fn err_invalid_paper_size(paper_size: &str) -> HtopError {
+  HtopError::new(format!("invalid paper size: {paper_size}"))
+}

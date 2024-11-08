@@ -35,7 +35,7 @@ fn main() -> Result<()> {
     print_header_footer: flag(&matches, "print-header-footer"),
     print_background: flag(&matches, "print-background"),
     scale: scale(string(&matches, "scale"))?,
-    paper_size: paper(&matches, "paper-format", "paper-width", "paper-height", verbose)?,
+    paper_size: paper(&matches, "paper-format", "paper-width", "paper-height", "paper-size", verbose)?,
     margins: margin(string(&matches, "margin"))?,
     page_ranges: string(&matches, "ranges"),
     header: file_content(&matches, "header", "header-file")?,
