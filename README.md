@@ -25,7 +25,7 @@
 [cc-badge]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
 [cc-url]: https://github.com/EngosSoftware/htop/blob/main/CODE_OF_CONDUCT.md
 
-[htop]: https://github.com/EngosSoftware/htop
+[repository-url]: https://github.com/EngosSoftware/htop
 [headless_chrome]: https://crates.io/crates/headless_chrome
 [html2pdf]: https://crates.io/crates/html2pdf
 [report a bug]: https://github.com/EngosSoftware/htop/issues
@@ -130,6 +130,6 @@ at your option.
 
 ## Contribution
 
-Any contributions to **[htop]** are greatly appreciated.
+Any contributions to [**htop**][repository-url] are greatly appreciated.
 All contributions intentionally submitted for inclusion in the work by you,
 shall be dual licensed as above, without any additional terms or conditions.
