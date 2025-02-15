@@ -9,6 +9,11 @@ tasks:
     cmds:
       - cmd: cargo build && cd bbt && ./bbt.sh ./tests && cd ..
 
+  bbtr:
+    desc: Runs all black-box tests with tracing
+    cmds:
+      - cmd: cargo build && cd bbt && ./bbt.sh ./tests trace && cd ..
+
   bbtt:
     desc: Runs black-box test in specified directory
     cmds:
