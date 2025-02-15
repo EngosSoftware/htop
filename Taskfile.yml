@@ -89,3 +89,9 @@ tasks:
     desc: Runs htop with provided arguments
     cmds:
       - cmd: cargo run -- {{.CLI_ARGS}}
+
+  x:
+    desc: Replaces expected PDF files with the actually generated ones
+    cmds:
+      - task: bbtr
+      - cmd: find ./bbt/tests -type f -name "actual.*" -exec rename actual expected '{}' \;
