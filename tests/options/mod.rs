@@ -1,1 +1,2 @@
+mod footer;
 mod version;

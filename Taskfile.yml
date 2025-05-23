@@ -40,10 +40,18 @@ tasks:
       - cmd: cargo +stable clippy --all-targets
       - cmd: cargo +nightly clippy --all-targets
 
-  cov:
+  cov1:
     desc: Runs code coverage using grcov
     cmds:
       - cmd: ./coverage.sh
+
+  cov:
+    desc: Generates code coverage report
+    cmds:
+      - cmd: cargo llvm-cov clean
+      - cmd: cargo llvm-cov --no-cfg-coverage
+      - cmd: cargo llvm-cov report --html
+      - cmd: echo -e "\n\e[1;32mOpen coverage report\x3A\e[0m file:///$(pwd)/target/llvm-cov/html/index.html\n"
 
   doc:
     desc: Generates documentation
