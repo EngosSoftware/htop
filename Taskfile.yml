@@ -80,6 +80,11 @@ tasks:
     cmds:
       - cmd: cargo +stable install htop --path=. --force
 
+  uninstall:
+    desc: Uninstalls the release version
+    cmds:
+      - cmd: cargo +stable uninstall htop
+
   musl:
     desc: Builds using the Linux MUSL target
     cmds:

@@ -13,6 +13,5 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.5.38", features = ["cargo"] }
 env_logger = "0.11.8"
-# To avoid breaking changes, we have fixed the version.
-headless_chrome = "=1.0.17"
+headless_chrome = "=1.0.17" # Because of breaking changes, this version is fixed.
 log = "0.4.27"

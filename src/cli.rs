@@ -8,7 +8,7 @@ use crate::defs::*;
 use crate::errors::*;
 use crate::paper::Paper;
 use crate::units::to_inches;
-use clap::{arg, command, crate_name, ArgAction, ArgGroup, ArgMatches};
+use clap::{arg, command, crate_name, ArgAction, ArgGroup, ArgMatches, Command};
 use std::fs;
 
 pub const SUBCOMMAND_SINGLE: &str = "single";
@@ -268,7 +268,7 @@ pub fn paper(matches: &ArgMatches, paper_format_id: &str, paper_width_id: &str, 
 }
 
 /// Returns command-line arguments matches.
-pub fn get_matches() -> ArgMatches {
+pub fn get_command() -> Command {
   command!()
     .arg(
       arg!(--"print-background")
@@ -491,5 +491,4 @@ pub fn get_matches() -> ArgMatches {
         .arg(arg!(<URL>).help(HELP_INPUT_URL).required(true).index(1))
         .arg(arg!([OUTPUT_FILE]).help(HELP_OUTPUT_FILE).required(false).index(2)),
     )
-    .get_matches()
 }

@@ -1,0 +1,6 @@
+error: the following required arguments were not provided:
+  --paper-height <PAPER_HEIGHT>
+
+Usage: htop --paper-width <PAPER_WIDTH> --paper-height <PAPER_HEIGHT>
+
+For more information, try '--help'.
