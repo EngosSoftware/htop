@@ -1,13 +1,4 @@
-//! # Application entry point
-
-use crate::cli::*;
-use crate::converter::{html_to_pdf, html_to_screenshot};
-use crate::defs::*;
-use crate::errors::Result;
-use crate::options::{PdfPrintingOptions, ScreenshotTakingOptions};
-use clap::{crate_description, crate_name, crate_version};
-use std::fs;
-use std::path::Path;
+//! # The application
 
 mod cli;
 mod converter;
@@ -17,12 +8,21 @@ mod options;
 mod paper;
 mod units;
 
-/// Main entrypoint of the application.
-fn main() -> Result<()> {
-  // get command-line argument matches
-  let matches = get_matches();
+use crate::cli::{file_content, flag, get_command, paper, string, timeout, SUBCOMMAND_MULTIPLE, SUBCOMMAND_SINGLE, SUBCOMMAND_URL};
+use crate::converter::{html_to_pdf, html_to_screenshot};
+use crate::defs::{file_name, file_url, has_html_extension, init_logger, margin, replace_ext, scale, window_size, Files, ScreenshotFormat};
+use crate::errors::Result;
+use crate::options::{PdfPrintingOptions, ScreenshotTakingOptions};
+use clap::{crate_description, crate_name, crate_version};
+use std::fs;
+use std::path::Path;
 
-  // initialize the logger
+/// Application entrypoint.
+fn main() -> Result<()> {
+  // Get command-line matches.
+  let matches = get_command().get_matches();
+
+  // Initialize the logger.
   init_logger(matches.get_one::<String>("log-level").cloned());
 
   let verbose = flag(&matches, "verbose");

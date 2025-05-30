@@ -1,6 +1,6 @@
 # Apple macOS x86_64
 
-name: macOs
+name: macOS
 
 on:
   push:
