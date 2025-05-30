@@ -71,7 +71,12 @@ tasks:
   test:
     desc: Runs tests in debug mode
     cmds:
-      - cmd: cargo test
+      - cmd: cargo +stable test
+
+  testn:
+    desc: Runs tests in debug mode using nextest
+    cmds:
+      - cmd: cargo +stable nextest run
 
   help:
     desc: Runs htop help option
