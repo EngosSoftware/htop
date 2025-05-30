@@ -187,7 +187,7 @@ where
   <T as FromStr>::Err: Debug,
 {
   if let Some(s) = matches.get_one::<String>(id).cloned() {
-    let value = s.parse::<T>().map_err(|e| err_invalid_value(&s, &format!("{:?}", e)))?;
+    let value = s.parse::<T>().map_err(|e| err_invalid_value(&s, &format!("{e:?}")))?;
     Ok(Some(value))
   } else {
     Ok(None)

@@ -52,6 +52,8 @@ impl From<PdfPrintingOptions> for PrintToPdfOptions {
       footer_template: value.footer,
       prefer_css_page_size: None,
       transfer_mode: None,
+      generate_document_outline: None,
+      generate_tagged_pdf: None,
     }
   }
 }
