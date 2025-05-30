@@ -54,7 +54,7 @@ impl From<PdfPrintingOptions> for PrintToPdfOptions {
       prefer_css_page_size: None,
       transfer_mode: None,
       generate_document_outline: None,
-      generate_tagged_pdf: None
+      generate_tagged_pdf: None,
     }
   }
 }
