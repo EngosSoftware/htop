@@ -49,7 +49,7 @@ tasks:
     desc: Generates code coverage report
     cmds:
       - cmd: cargo llvm-cov clean
-      - cmd: cargo llvm-cov --no-cfg-coverage
+      - cmd: cargo llvm-cov nextest --no-cfg-coverage
       - cmd: cargo llvm-cov report --html
       - cmd: echo -e "\n\e[1;32mOpen coverage report\x3A\e[0m file:///$(pwd)/target/llvm-cov/html/index.html\n"
 
