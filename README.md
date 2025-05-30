@@ -8,6 +8,7 @@
 [![MIT licensed][mit-badge]][mit-license-url]
 [![Apache 2.0 licensed][apache-badge]][apache-license-url]
 [![Contributor Covenant][cc-badge]][cc-url]
+[![Made by Human][mbh-badge]][cc-url]
 
 [crates-badge]: https://img.shields.io/crates/v/htop.svg
 [crates-url]: https://crates.io/crates/htop
@@ -24,11 +25,13 @@
 [coverage-badge]: https://img.shields.io/badge/Code%20coverage-100%25-green.svg
 [cc-badge]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
 [cc-url]: https://github.com/EngosSoftware/htop/blob/main/CODE_OF_CONDUCT.md
-
+[mbh-badge]: https://img.shields.io/badge/Made_by-HUMAN-d35400.svg
 [repository-url]: https://github.com/EngosSoftware/htop
+
 [headless_chrome]: https://crates.io/crates/headless_chrome
 [html2pdf]: https://crates.io/crates/html2pdf
 [report a bug]: https://github.com/EngosSoftware/htop/issues
+[Engos Software]: https://engos.de
 
 ## Overview
 
@@ -133,3 +136,6 @@ at your option.
 Any contributions to [**htop**][repository-url] are greatly appreciated.
 All contributions intentionally submitted for inclusion in the work by you,
 shall be dual licensed as above, without any additional terms or conditions.
+---
+
+Brought to you with 💙 by [Engos Software]
