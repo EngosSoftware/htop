@@ -9,6 +9,12 @@ keywords = ["html", "pdf", "headless", "chrome", "converter"]
 categories = ["command-line-utilities", "encoding"]
 license = "MIT OR Apache-2.0"
 edition = "2021"
+exclude = [
+    "rustfmt.toml",
+    "Taskfile.yml",
+    ".github/",
+    ".gitignore"
+]
 
 [dependencies]
 clap = { version = "4.5.39", features = ["cargo"] }
