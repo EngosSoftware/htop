@@ -12,9 +12,9 @@ fn _0001() {
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
-    .arg("--footer=<div style='width:100%; font-size:12pt; font-weight:bold; text-align:center; border: 3px solid green;'>CUSTOM FOOTER</div>")
+    .arg("--header-file=header.html")
     .arg("--print-header-footer")
-    .arg("--margin=0 0 2.5cm 0")
+    .arg("--margin=2.5cm 0 0 0")
     .arg("single")
     .arg("H_000010.html")
     .arg("actual.pdf")
@@ -28,4 +28,19 @@ fn _0001() {
   let test_result = matches!(comparison_result, ComparisonResult::SimilarPercentage(_, _));
   tc.tear_down(test_result);
   assert!(test_result, "{comparison_result:?}");
+}
+
+#[test]
+fn _0002() {
+  let tc = test_context!();
+  let mut cmd = Command::cargo_bin("htop").unwrap();
+  cmd
+    .current_dir(tc.current_dir)
+    .arg("-b")
+    .arg("--header-file=non-existing.html")
+    .arg("single")
+    .arg("H_000010.html")
+    .arg("actual.pdf")
+    .assert()
+    .stderr("Error: reading file non-existing.html failed with reason: No such file or directory (os error 2)\n");
 }
