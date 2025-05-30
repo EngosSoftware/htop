@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.2.1](https://github.com/EngosSoftware/htop/tree/v0.2.1) (2025-05-30)
+
+[Full Changelog](https://github.com/EngosSoftware/htop/compare/v0.2.0...v0.2.1)
+
+**Merged pull requests:**
+
+- Fixed breaking changes caused by `headless_chrome` [\#15](https://github.com/EngosSoftware/htop/pull/15) by [howardah](https://github.com/howardah)
+
 ## [v0.2.0](https://github.com/EngosSoftware/htop/tree/v0.2.0) (2024-11-06)
 
 [Full Changelog](https://github.com/EngosSoftware/htop/compare/v0.1.9...v0.2.0)
@@ -20,4 +28,4 @@
 
 **Merged pull requests:**
 
-- Minor improvements [\#6](https://github.com/EngosSoftware/htop/pull/6) ([DariuszDepta](https://github.com/DariuszDepta))
+- Minor improvements [\#6](https://github.com/EngosSoftware/htop/pull/6) by [DariuszDepta](https://github.com/DariuszDepta)
