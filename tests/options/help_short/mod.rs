@@ -7,7 +7,7 @@ use std::process::Command;
 fn _0001() {
   let tc = test_context!().set_up();
   let mut cmd = Command::cargo_bin("htop").unwrap();
-  cmd.current_dir(tc.current_dir()).arg("--help").assert().stdout(
+  cmd.current_dir(tc.current_dir()).arg("-h").assert().stdout(
     r#"HTML to PDF converter
 
 Usage: htop [OPTIONS] [COMMAND]
