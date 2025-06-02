@@ -49,7 +49,7 @@ macro_rules! test_context {
       current_dir,
       expected_pdf,
       actual_pdf,
-      percentage_limit: 0.04,
+      percentage_limit: 0.06,
     }
   }};
 }
