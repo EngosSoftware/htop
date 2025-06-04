@@ -6,7 +6,7 @@ fn _0001() {
   let mut cmd = Command::cargo_bin("htop").unwrap();
   cmd
     .current_dir(tc.current_dir())
-    .arg("-P")
+    .arg("-W")
     .arg("single")
     .arg("H_000010.html")
     .arg(tc.actual_name())
