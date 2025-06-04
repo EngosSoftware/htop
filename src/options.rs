@@ -30,7 +30,7 @@ pub struct PdfPrintingOptions {
   /// Flag indicating if crash reporter should be disabled, `true` = disabled.
   pub no_crash_reports: bool,
   /// Page load timeout in milliseconds.
-  pub page_load_timout: Timeout,
+  pub page_load_timeout: Timeout,
 }
 
 impl From<PdfPrintingOptions> for PrintToPdfOptions {
@@ -63,7 +63,7 @@ impl From<PdfPrintingOptions> for PrintToPdfOptions {
 #[derive(Clone)]
 pub struct ScreenshotTakingOptions {
   /// Output format for the screenshot.
-  pub output_format: Option<ScreenshotFormat>,
+  pub screenshot_format: Option<ScreenshotFormat>,
   /// Requested window size of the headless browser when taking the screenshot.
   pub window_size: WindowSize,
   /// Flag indicating if this process should be more talkative, `true` = more talkative.

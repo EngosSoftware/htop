@@ -109,7 +109,7 @@ fn _0006() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid margin: 0 0 0\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -127,7 +127,7 @@ fn _0007() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid margin: 0.0 0.0 0.0\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -183,7 +183,7 @@ fn _0010() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid margin: 0 0 0 0 0\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -201,5 +201,5 @@ fn _0011() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid margin: 0.0 0.0 0.0 0.0 0.0\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

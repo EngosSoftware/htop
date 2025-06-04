@@ -38,7 +38,7 @@ fn _0001() {
       .collect::<Vec<_>>()
       .join("\n")
   );
-  tc.tear_down(true);
+  tc.tear_down();
 }
 
 #[test]
@@ -63,7 +63,7 @@ Usage: htop --paper-format <FORMAT>
 For more information, try '--help'.
 "#,
     );
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -88,7 +88,7 @@ Usage: htop --paper-format <FORMAT>
 For more information, try '--help'.
 "#,
     );
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -112,7 +112,7 @@ Usage: htop --paper-height <PAPER_HEIGHT> --paper-width <PAPER_WIDTH>
 For more information, try '--help'.
 "#,
     );
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -136,7 +136,7 @@ Usage: htop --paper-width <PAPER_WIDTH> --paper-height <PAPER_HEIGHT>
 For more information, try '--help'.
 "#,
     );
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -153,7 +153,7 @@ fn _0006() {
     .assert()
     .code(1)
     .stderr("Error: paper height is out of range (0.19..100 in): 100.0125 in\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -170,7 +170,7 @@ fn _0007() {
     .assert()
     .code(1)
     .stderr("Error: paper height is out of range (0.19..100 in): 0.1575 in\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -187,7 +187,7 @@ fn _0008() {
     .assert()
     .code(1)
     .stderr("Error: invalid number: 4a1\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -204,7 +204,7 @@ fn _0009() {
     .assert()
     .code(1)
     .stderr("Error: paper width is out of range (0.19..100 in): 100.40625 in\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -221,7 +221,7 @@ fn _0010() {
     .assert()
     .code(1)
     .stderr("Error: paper width is out of range (0.19..100 in): 0.1575 in\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -238,5 +238,5 @@ fn _0011() {
     .assert()
     .code(1)
     .stderr("Error: invalid number: 4a1\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

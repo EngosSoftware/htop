@@ -23,8 +23,17 @@ pub type Scale = Option<f64>;
 /// Type alias for timeout.
 pub type Timeout = Option<u64>;
 
-/// Extension of PDF files.
+/// Extension for PDF files.
 pub const PDF_EXTENSION: &str = "pdf";
+
+/// Extension for JPEG files.
+pub const JPEG_EXTENSION: &str = "jpg";
+
+/// Extension for PNG files.
+pub const PNG_EXTENSION: &str = "png";
+
+/// Extension for WEBP files.
+pub const WEBP_EXTENSION: &str = "webp";
 
 /// Extension of HTML files.
 pub const HTML_EXTENSION: &str = "html";
@@ -41,6 +50,16 @@ pub enum ScreenshotFormat {
   Jpeg,
   Png,
   Webp,
+}
+
+impl ScreenshotFormat {
+  pub fn extension(&self) -> &'static str {
+    match self {
+      ScreenshotFormat::Jpeg => JPEG_EXTENSION,
+      ScreenshotFormat::Png => PNG_EXTENSION,
+      ScreenshotFormat::Webp => WEBP_EXTENSION,
+    }
+  }
 }
 
 /// Converts margin definition into a tuple of values in inches.
@@ -101,16 +120,24 @@ pub fn file_url_unchecked(file_path: &Path) -> String {
   format!("file://{}", file_path.canonicalize().unwrap().to_string_lossy())
 }
 
-/// Replaces the extension to `.pdf`.
-pub fn replace_ext(path: &Path) -> String {
-  path.with_extension(PDF_EXTENSION).to_string_lossy().to_string()
+/// Replaces the extension of the provided file.
+pub fn replace_file_extension(path: &Path, screenshot_format: Option<ScreenshotFormat>) -> String {
+  let file_extension = if let Some(screenshot_format) = screenshot_format {
+    screenshot_format.extension()
+  } else {
+    PDF_EXTENSION
+  };
+  path.with_extension(file_extension).to_string_lossy().to_string()
 }
 
-/// Replaces the extension to `.pdf` and returns the file name.
-pub fn file_name(path: &Path) -> String {
-  // Calling unwrap() is ok, because this function is always called for proper files.
-  // If this assumption is not valid anymore, then handle the error.
-  path.with_extension(PDF_EXTENSION).file_name().unwrap().to_string_lossy().to_string()
+/// Replaces the extension and returns the file name.
+pub fn file_name(path: &Path, screenshot_format: Option<ScreenshotFormat>) -> String {
+  let file_extension = if let Some(screenshot_format) = screenshot_format {
+    screenshot_format.extension()
+  } else {
+    PDF_EXTENSION
+  };
+  path.with_extension(file_extension).file_name().unwrap().to_string_lossy().to_string()
 }
 
 /// Returns `true` when specified path has `HTML` file extension.

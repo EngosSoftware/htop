@@ -12,5 +12,5 @@ fn _0001() {
     .code(1)
     .stdout("")
     .stderr("Error: writing file / failed with reason: Is a directory (os error 21)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

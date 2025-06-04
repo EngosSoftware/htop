@@ -15,5 +15,5 @@ fn _0001() {
     .stdout("")
     .stderr("");
   assert_eq!("Page size:       841.92 x 1191.12 pts (A3)", tc.pdf_info_page_size());
-  tc.tear_down(true);
+  tc.tear_down();
 }

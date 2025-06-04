@@ -12,7 +12,7 @@ fn _0001() {
     .code(1)
     .stdout("")
     .stderr("Error: reading directory ./a failed with reason: No such file or directory (os error 2)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -26,7 +26,7 @@ fn _0002() {
     .code(1)
     .stdout("")
     .stderr("Error: reading directory ./x failed with reason: No such file or directory (os error 2)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[cfg(target_os = "linux")]
@@ -46,5 +46,5 @@ fn _0003() {
     .code(1)
     .stdout("")
     .stderr("Error: writing file ./dst/H_000010.pdf failed with reason: Permission denied (os error 13)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

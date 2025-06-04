@@ -24,7 +24,7 @@ fn assert_paper_format(suffix: &str, paper_format: &str, htop: &str, pdfinfo: &s
       .join("\n")
   );
   assert_eq!(pdfinfo, tc.pdf_info_page_size());
-  tc.tear_down(true);
+  tc.tear_down();
 }
 
 #[test]

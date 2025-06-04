@@ -19,7 +19,7 @@ fn _0001() {
     .code(1)
     .stdout("")
     .stderr("Error: writing file ./dst/output.jpg failed with reason: Permission denied (os error 13)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 /// Tests generating PNG screenshot when there is no write permission for destination directory.
@@ -41,7 +41,7 @@ fn _0002() {
     .code(1)
     .stdout("")
     .stderr("Error: writing file ./dst/output.png failed with reason: Permission denied (os error 13)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 /// Tests generating WEBP screenshot when there is no write permission for destination directory.
@@ -63,5 +63,5 @@ fn _0003() {
     .code(1)
     .stdout("")
     .stderr("Error: writing file ./dst/output.webp failed with reason: Permission denied (os error 13)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

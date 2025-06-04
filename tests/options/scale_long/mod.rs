@@ -29,5 +29,5 @@ fn _0002() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid number: 2a0\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

@@ -14,7 +14,7 @@ fn _0001() {
     .code(1)
     .stdout("")
     .stderr("Error: headless chrome failed with reason: Navigate failed: net::ERR_NAME_NOT_RESOLVED\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -27,5 +27,5 @@ fn _0002() {
     .code(1)
     .stdout("")
     .stderr("Error: headless chrome failed with reason: Navigate failed: net::ERR_NAME_NOT_RESOLVED\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

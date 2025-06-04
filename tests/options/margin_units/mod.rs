@@ -141,5 +141,5 @@ fn _0008() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid number: 1a2\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

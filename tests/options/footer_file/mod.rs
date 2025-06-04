@@ -31,5 +31,5 @@ fn _0002() {
     .arg(tc.actual_name())
     .assert()
     .stderr("Error: reading file non-existing.html failed with reason: No such file or directory (os error 2)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

@@ -76,11 +76,10 @@ impl TestContext {
   }
 
   /// Finalizes the testing context.
-  pub fn tear_down(self, delete_actual: bool) -> Self {
-    if delete_actual {
+  pub fn tear_down(&self) {
+    if fs::exists(&self.actual).unwrap() {
       fs::remove_file(&self.actual).unwrap()
     }
-    self
   }
 
   /// Compares default files for similarity.
@@ -100,10 +99,20 @@ impl TestContext {
   }
 
   /// Asserts that expected an actual PDF files are similar.
-  pub fn assert_similar(self) {
+  pub fn assert_similar(&self) {
     let (test_result, comparison_result) = self.compare_similar();
-    self.tear_down(test_result);
     assert!(test_result, "{comparison_result:?}");
+    self.tear_down();
+  }
+
+  /// Asserts that expected an actual PDF files are similar.
+  pub fn assert_similar_files(&self, expected: &PathBuf, actual: &PathBuf) {
+    let (test_result, comparison_result) = self.compare_similar_files(expected, actual);
+    assert!(test_result, "{comparison_result:?}");
+    self.tear_down();
+    if fs::exists(actual).unwrap() {
+      fs::remove_file(actual).unwrap()
+    }
   }
 
   /// Returns path to specified file.

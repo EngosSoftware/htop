@@ -15,7 +15,7 @@ fn _0001() {
     .code(1)
     .stdout("")
     .stderr("Error: headless chrome failed with reason: The event waited for never came\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 /// Tests timeout when converting URL.
@@ -34,7 +34,7 @@ fn _0002() {
     .code(1)
     .stdout("")
     .stderr("Error: headless chrome failed with reason: The event waited for never came\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 /// Tests timeout when converting multiple files.
@@ -52,7 +52,7 @@ fn _0003() {
     .code(1)
     .stdout("")
     .stderr("Error: headless chrome failed with reason: The event waited for never came\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 /// Tests timeout when taking a screenshot.
@@ -70,7 +70,7 @@ fn _0004() {
     .code(1)
     .stdout("")
     .stderr("Error: headless chrome failed with reason: The event waited for never came\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -88,7 +88,7 @@ fn _0005() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid timeout: 50s\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -105,5 +105,5 @@ fn _0006() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid timeout: -20\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

@@ -11,7 +11,7 @@ mod units;
 use clap::{crate_description, crate_name, crate_version};
 use cli::{file_content, flag, get_command, paper, string, timeout, SUBCOMMAND_MULTIPLE, SUBCOMMAND_SINGLE, SUBCOMMAND_URL};
 use converter::{html_to_pdf, html_to_screenshot};
-use defs::{file_name, file_url, file_url_unchecked, has_html_extension, init_logger, margin, replace_ext, scale, window_size, Files, ScreenshotFormat};
+use defs::{file_name, file_url, file_url_unchecked, has_html_extension, init_logger, margin, replace_file_extension, scale, window_size, Files, ScreenshotFormat};
 use errors::{err_read_dir, Result};
 use options::{PdfPrintingOptions, ScreenshotTakingOptions};
 use std::fs;
@@ -27,7 +27,7 @@ fn main() -> Result<()> {
 
   let verbose = flag(&matches, "verbose");
   let no_crash_reports = flag(&matches, "no-crash-reports");
-  let page_load_timout = timeout(&matches, "timeout")?;
+  let page_load_timeout = timeout(&matches, "timeout")?;
 
   // prepare printing options
   let pdf_printing_options = PdfPrintingOptions {
@@ -42,10 +42,10 @@ fn main() -> Result<()> {
     footer: file_content(&matches, "footer", "footer-file")?,
     verbose,
     no_crash_reports,
-    page_load_timout,
+    page_load_timeout,
   };
 
-  let output_format = if flag(&matches, "jpeg") {
+  let screenshot_format = if flag(&matches, "jpeg") {
     Some(ScreenshotFormat::Jpeg)
   } else if flag(&matches, "png") {
     Some(ScreenshotFormat::Png)
@@ -56,19 +56,19 @@ fn main() -> Result<()> {
   };
 
   let screenshot_taking_options = ScreenshotTakingOptions {
-    output_format,
+    screenshot_format,
     window_size: window_size(string(&matches, "window-size"))?,
     verbose,
     no_crash_reports,
-    page_load_timeout: page_load_timout,
+    page_load_timeout,
   };
 
   let process_files = |files: Files| -> Result<()> {
-    if output_format.is_some() {
-      // take screenshots
+    if screenshot_format.is_some() {
+      // Take screenshot(s).
       html_to_screenshot(files, screenshot_taking_options)
     } else {
-      // print PDF
+      // Print PDF file(s).
       html_to_pdf(files, pdf_printing_options)
     }
   };
@@ -85,7 +85,7 @@ fn main() -> Result<()> {
       let output_file_name = if let Some(output_file) = m.get_one::<String>("OUTPUT_FILE") {
         output_file.to_owned()
       } else {
-        replace_ext(input_file_path)
+        replace_file_extension(input_file_path, screenshot_format)
       };
       process_files(vec![(input_file_url, output_file_name)])?;
     }
@@ -100,7 +100,7 @@ fn main() -> Result<()> {
           let entry = path.unwrap().path();
           if entry.is_file() && has_html_extension(entry.as_path()) {
             let input_file_url = file_url_unchecked(&entry); // Change to file_url when an erroneous case is found.
-            let output_file_path = Path::new(output_dir).join(file_name(entry.as_path()));
+            let output_file_path = Path::new(output_dir).join(file_name(entry.as_path(), screenshot_format));
             let output_file_name = output_file_path.to_string_lossy().to_string();
             files.push((input_file_url, output_file_name));
           }
@@ -110,7 +110,7 @@ fn main() -> Result<()> {
           let entry = path.unwrap().path();
           if entry.is_file() && has_html_extension(entry.as_path()) {
             let input_file_url = file_url_unchecked(&entry); // Change to file_url when an erroneous case is found.
-            let output_file_name = replace_ext(entry.as_path());
+            let output_file_name = replace_file_extension(entry.as_path(), screenshot_format);
             files.push((input_file_url, output_file_name));
           }
         }
@@ -123,9 +123,9 @@ fn main() -> Result<()> {
       // output file name is optional, when not provided, then
       // the output file name is set to predefined value
       let output_file_name = if let Some(output_file) = m.get_one::<String>("OUTPUT_FILE") {
-        output_file.to_owned()
+        replace_file_extension(Path::new(output_file), screenshot_format)
       } else {
-        "output.pdf".to_string()
+        replace_file_extension(Path::new("output.html"), screenshot_format)
       };
       process_files(vec![(input_url, output_file_name)])?;
     }

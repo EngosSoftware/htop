@@ -34,7 +34,7 @@ fn _0002() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid length: 300.0\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -53,5 +53,5 @@ fn _0003() {
     .code(1)
     .stdout("")
     .stderr("Error: invalid number: 3a0.0\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

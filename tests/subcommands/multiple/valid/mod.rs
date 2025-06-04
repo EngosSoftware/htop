@@ -22,5 +22,5 @@ fn _0001() {
   tc.delete("H_000011.pdf");
   tc.delete("H_000020.pdf");
   tc.delete("H_000021.pdf");
-  tc.tear_down(false);
+  tc.tear_down();
 }

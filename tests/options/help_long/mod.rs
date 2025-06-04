@@ -153,5 +153,5 @@ Options:
           Print version
 "#,
   );
-  tc.tear_down(false);
+  tc.tear_down();
 }

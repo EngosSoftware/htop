@@ -14,5 +14,5 @@ fn _0001() {
     .stderr("");
   tc.compare_similar_files(&tc.path("expected.pdf"), &tc.path("H_000010.pdf"));
   tc.delete("H_000010.pdf");
-  tc.tear_down(false);
+  tc.tear_down();
 }

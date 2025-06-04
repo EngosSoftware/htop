@@ -14,5 +14,5 @@ fn _0001() {
     .assert()
     .code(1)
     .stderr("Error: invalid paper format 'P23'\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

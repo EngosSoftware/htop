@@ -36,6 +36,6 @@ fn _0001() {
   let file_2 = File::open(tc.actual()).unwrap();
   let comparison_result = compare(file_1, file_2, &comparison_options);
   let test_result = matches!(comparison_result, ComparisonResult::SimilarPercentage(_, _));
-  tc.tear_down(test_result);
   assert!(test_result, "{comparison_result:?}");
+  tc.tear_down();
 }

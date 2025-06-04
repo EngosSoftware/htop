@@ -17,5 +17,5 @@ fn _0001() {
   tc.compare_similar_files(&tc.path("expected-H_000011.pdf"), &tc.path("H_000011.pdf"));
   tc.delete("H_000010.pdf");
   tc.delete("H_000011.pdf");
-  tc.tear_down(false);
+  tc.tear_down();
 }

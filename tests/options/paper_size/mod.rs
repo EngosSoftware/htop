@@ -37,7 +37,7 @@ fn _0001() {
       .collect::<Vec<_>>()
       .join("\n")
   );
-  tc.tear_down(true);
+  tc.tear_down();
 }
 
 #[test]
@@ -54,7 +54,7 @@ fn _0002() {
     .assert()
     .code(1)
     .stderr("Error: invalid paper size: 212mm:299mm\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -71,7 +71,7 @@ fn _0003() {
     .assert()
     .code(1)
     .stderr("Error: invalid length: 299\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
 
 #[test]
@@ -88,5 +88,5 @@ fn _0004() {
     .assert()
     .code(1)
     .stderr("Error: invalid length: 212\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }

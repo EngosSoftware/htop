@@ -16,7 +16,7 @@ pub fn html_to_pdf(files: Files, pdf_printing_options: PdfPrintingOptions) -> Re
   let verbose = pdf_printing_options.verbose;
   let paper_size = pdf_printing_options.paper_size;
   let browser = get_browser(pdf_printing_options.no_crash_reports, None)?;
-  let tab = get_tab(&browser, pdf_printing_options.page_load_timout)?;
+  let tab = get_tab(&browser, pdf_printing_options.page_load_timeout)?;
   for (input_url, output_file_name) in &files {
     if verbose {
       println!("[{}] Printing file {}", crate_name!(), input_url);
@@ -45,7 +45,7 @@ pub fn html_to_pdf(files: Files, pdf_printing_options: PdfPrintingOptions) -> Re
 
 /// Takes screenshot of `HTML` files.
 pub fn html_to_screenshot(files: Files, screenshot_taking_options: ScreenshotTakingOptions) -> Result<()> {
-  let output_format = screenshot_taking_options.output_format.unwrap_or(ScreenshotFormat::Png);
+  let output_format = screenshot_taking_options.screenshot_format.unwrap_or(ScreenshotFormat::Png);
   let verbose = screenshot_taking_options.verbose;
   let browser = get_browser(screenshot_taking_options.no_crash_reports, screenshot_taking_options.window_size)?;
   let tab = get_tab(&browser, screenshot_taking_options.page_load_timeout)?;

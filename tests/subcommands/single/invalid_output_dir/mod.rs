@@ -13,5 +13,5 @@ fn _0001() {
     .code(1)
     .stdout("")
     .stderr("Error: writing file out/actual.pdf failed with reason: No such file or directory (os error 2)\n");
-  tc.tear_down(false);
+  tc.tear_down();
 }
