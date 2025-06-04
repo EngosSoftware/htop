@@ -22,7 +22,7 @@
 [build-badge-linux]: https://github.com/EngosSoftware/htop/actions/workflows/build-linux.yml/badge.svg
 [build-badge-windows]: https://github.com/EngosSoftware/htop/actions/workflows/build-windows.yml/badge.svg
 [build-badge-macos]: https://github.com/EngosSoftware/htop/actions/workflows/build-macos.yml/badge.svg
-[coverage-badge]: https://img.shields.io/badge/Code%20coverage-100%25-green.svg
+[coverage-badge]: https://img.shields.io/badge/Code%20coverage-98%25-green.svg
 [cc-badge]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
 [cc-url]: https://github.com/EngosSoftware/htop/blob/main/CODE_OF_CONDUCT.md
 [mbh-badge]: https://img.shields.io/badge/Made_by-HUMAN-d35400.svg
@@ -81,6 +81,24 @@ htop multiple input_directory output_directory
 
 ```shell
 htop url https://decision-toolkit.org
+```
+
+### Convert a single HTML file into a single JPEG file
+
+```shell
+htop --jpeg single input_file.html output_file.jpg
+```
+
+### Convert a single HTML file into a single PNG file
+
+```shell
+htop --png single input_file.html output_file.png
+```
+
+### Convert a single HTML file into a single WEBP file
+
+```shell
+htop --webp single input_file.html output_file.webp
 ```
 
 ## User guide

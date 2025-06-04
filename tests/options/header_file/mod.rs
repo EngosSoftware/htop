@@ -22,8 +22,8 @@ fn _0001() {
     .success();
   let mut comparison_options = ComparisonOptions::default();
   comparison_options.percentage_limit = tc.percentage_limit().into();
-  let file_1 = File::open(tc.expected_pdf()).unwrap();
-  let file_2 = File::open(tc.actual_pdf()).unwrap();
+  let file_1 = File::open(tc.expected()).unwrap();
+  let file_2 = File::open(tc.actual()).unwrap();
   let comparison_result = compare(file_1, file_2, &comparison_options);
   let test_result = matches!(comparison_result, ComparisonResult::SimilarPercentage(_, _));
   tc.tear_down(test_result);

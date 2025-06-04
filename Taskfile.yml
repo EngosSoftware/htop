@@ -4,30 +4,10 @@ silent: true
 
 tasks:
 
-  bbt:
-    desc: Runs all black-box tests
-    cmds:
-      - cmd: cargo build && cd bbt && ./bbt.sh ./tests && cd ..
-
-  bbtr:
-    desc: Runs all black-box tests with tracing
-    cmds:
-      - cmd: cargo build && cd bbt && ./bbt.sh ./tests trace && cd ..
-
-  bbtt:
-    desc: Runs black-box test in specified directory
-    cmds:
-      - cmd: cargo build && cd bbt && ./bbt.sh {{.CLI_ARGS}} && cd ..
-
-  bbttt:
-    desc: Runs black-box test in specified directory with tracing
-    cmds:
-      - cmd: cargo build && cd bbt && ./bbt.sh {{.CLI_ARGS}} trace && cd ..
-
   build:
     desc: Builds in debug mode
     cmds:
-      - cmd: cargo build
+      - cmd: cargo +stable build
 
   clean:
     desc: Cleans all targets
@@ -38,15 +18,17 @@ tasks:
     desc: Runs clippy for all targets
     cmds:
       - cmd: cargo +stable clippy --all-targets
-      - cmd: cargo +nightly clippy --all-targets
-
-  cov1:
-    desc: Runs code coverage using grcov
-    cmds:
-      - cmd: ./coverage.sh
 
   cov:
     desc: Generates code coverage report
+    cmds:
+      - cmd: cargo llvm-cov clean
+      - cmd: cargo llvm-cov --no-cfg-coverage
+      - cmd: cargo llvm-cov report --html
+      - cmd: echo -e "\n\e[1;32mOpen coverage report\x3A\e[0m file:///$(pwd)/target/llvm-cov/html/index.html\n"
+
+  covn:
+    desc: Generates code coverage report using nextest
     cmds:
       - cmd: cargo llvm-cov clean
       - cmd: cargo llvm-cov nextest --no-cfg-coverage
@@ -56,7 +38,7 @@ tasks:
   doc:
     desc: Generates documentation
     cmds:
-      - cmd: cargo doc --no-deps
+      - cmd: cargo +stable doc --no-deps
 
   doc-open:
     desc: Generates documentation and opens it in browser
@@ -81,12 +63,12 @@ tasks:
   help:
     desc: Runs htop help option
     cmds:
-      - cmd: cargo run -- -h
+      - cmd: cargo +stable run -- -h
 
   help-long:
     desc: Runs htop help option
     cmds:
-      - cmd: cargo run -- --help
+      - cmd: cargo +stable run -- --help
 
   install:
     desc: Builds and installs release version
@@ -106,10 +88,4 @@ tasks:
   run:
     desc: Runs htop with provided arguments
     cmds:
-      - cmd: cargo run -- {{.CLI_ARGS}}
-
-  x:
-    desc: Replaces expected PDF files with the actually generated ones
-    cmds:
-      - task: bbtr
-      - cmd: find ./bbt/tests -type f -name "actual.*" -exec rename actual expected '{}' \;
+      - cmd: cargo +stable run -- {{.CLI_ARGS}}

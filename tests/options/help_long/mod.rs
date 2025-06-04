@@ -153,4 +153,5 @@ Options:
           Print version
 "#,
   );
+  tc.tear_down(false);
 }

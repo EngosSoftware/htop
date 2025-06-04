@@ -8,12 +8,12 @@ mod options;
 mod paper;
 mod units;
 
-use crate::cli::{file_content, flag, get_command, paper, string, timeout, SUBCOMMAND_MULTIPLE, SUBCOMMAND_SINGLE, SUBCOMMAND_URL};
-use crate::converter::{html_to_pdf, html_to_screenshot};
-use crate::defs::{file_name, file_url, has_html_extension, init_logger, margin, replace_ext, scale, window_size, Files, ScreenshotFormat};
-use crate::errors::Result;
-use crate::options::{PdfPrintingOptions, ScreenshotTakingOptions};
 use clap::{crate_description, crate_name, crate_version};
+use cli::{file_content, flag, get_command, paper, string, timeout, SUBCOMMAND_MULTIPLE, SUBCOMMAND_SINGLE, SUBCOMMAND_URL};
+use converter::{html_to_pdf, html_to_screenshot};
+use defs::{file_name, file_url, file_url_unchecked, has_html_extension, init_logger, margin, replace_ext, scale, window_size, Files, ScreenshotFormat};
+use errors::{err_read_dir, Result};
+use options::{PdfPrintingOptions, ScreenshotTakingOptions};
 use std::fs;
 use std::path::Path;
 
@@ -76,12 +76,12 @@ fn main() -> Result<()> {
   // parse subcommands
   match matches.subcommand() {
     Some((SUBCOMMAND_SINGLE, m)) => {
-      // input file name is required
+      // Input file name is required.
       let input_file = m.get_one::<String>("INPUT_FILE").unwrap();
       let input_file_path = Path::new(input_file);
       let input_file_url = file_url(input_file_path)?;
-      // output file name is optional, when not provided, then
-      // the output file name is derived from the input file name
+      // Output file name is optional, when not provided, then
+      // the output file name is derived from the input file name.
       let output_file_name = if let Some(output_file) = m.get_one::<String>("OUTPUT_FILE") {
         output_file.to_owned()
       } else {
@@ -91,25 +91,25 @@ fn main() -> Result<()> {
     }
     Some((SUBCOMMAND_MULTIPLE, m)) => {
       let mut files: Files = vec![];
-      // input directory name is required
+      // Input directory name is required.
       let input_dir = m.get_one::<String>("INPUT_DIR").unwrap();
-      // output directory is optional, when not provided, then
-      // the input directory is used as output directory
+      // Output directory is optional, when not provided, then
+      // the input directory is used as output directory.
       if let Some(output_dir) = m.get_one::<String>("OUTPUT_DIR") {
-        for path in fs::read_dir(input_dir).unwrap() {
+        for path in fs::read_dir(input_dir).map_err(|e| err_read_dir(input_dir, e.to_string()))? {
           let entry = path.unwrap().path();
           if entry.is_file() && has_html_extension(entry.as_path()) {
-            let input_file_url = file_url(&entry)?;
-            let output_file_path = Path::new(output_dir).join(file_name(entry.as_path())?);
+            let input_file_url = file_url_unchecked(&entry); // Change to file_url when an erroneous case is found.
+            let output_file_path = Path::new(output_dir).join(file_name(entry.as_path()));
             let output_file_name = output_file_path.to_string_lossy().to_string();
             files.push((input_file_url, output_file_name));
           }
         }
       } else {
-        for path in fs::read_dir(input_dir).unwrap() {
+        for path in fs::read_dir(input_dir).map_err(|e| err_read_dir(input_dir, e.to_string()))? {
           let entry = path.unwrap().path();
           if entry.is_file() && has_html_extension(entry.as_path()) {
-            let input_file_url = file_url(&entry)?;
+            let input_file_url = file_url_unchecked(&entry); // Change to file_url when an erroneous case is found.
             let output_file_name = replace_ext(entry.as_path());
             files.push((input_file_url, output_file_name));
           }

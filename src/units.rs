@@ -89,31 +89,3 @@ fn unit_to_inches(s: &str, unit: CssUnit) -> Result<f64> {
     CssUnit::PX => value / 96.0,
   })
 }
-
-#[cfg(test)]
-mod tests {
-  use super::*;
-
-  fn eq(expected: f64, actual: f64) {
-    assert!((expected - (actual * 1000.0).round() / 1000.0).abs() < f64::EPSILON);
-  }
-
-  #[test]
-  fn test_length_to_inches() {
-    eq(0.0, to_inches("0").unwrap());
-    eq(0.0, to_inches("0.0").unwrap());
-    eq(1.0, to_inches("2.54cm").unwrap());
-    eq(-1.0, to_inches("-2.54cm").unwrap());
-    eq(1.0, to_inches("254e-2cm").unwrap());
-    eq(-1.0, to_inches("-254e-2cm").unwrap());
-    eq(1.0, to_inches("25.4mm").unwrap());
-    eq(1.0, to_inches("101.6Q").unwrap());
-    eq(1.0, to_inches("1in").unwrap());
-    eq(1.0, to_inches("6pc").unwrap());
-    eq(1.0, to_inches("72pt").unwrap());
-    eq(1.0, to_inches("96px").unwrap());
-    assert!(to_inches("9a6px").is_err());
-    assert!(to_inches("20").is_err());
-    assert!(to_inches("56.23").is_err());
-  }
-}

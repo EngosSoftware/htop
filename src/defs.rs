@@ -88,12 +88,17 @@ pub fn window_size(opt_window_size: Option<String>) -> Result<WindowSize> {
   }
 }
 
-/// Converts file path into file URL string.
+/// Converts file path into file URL string with canonicalize checks.
 pub fn file_url(file_path: &Path) -> Result<String> {
   Ok(format!(
     "file://{}",
     file_path.canonicalize().map_err(|e| err_canonicalize(file_path, e.to_string()))?.to_string_lossy()
   ))
+}
+
+/// Converts file path into file URL string without canonicalize checks.
+pub fn file_url_unchecked(file_path: &Path) -> String {
+  format!("file://{}", file_path.canonicalize().unwrap().to_string_lossy())
 }
 
 /// Replaces the extension to `.pdf`.
@@ -102,8 +107,10 @@ pub fn replace_ext(path: &Path) -> String {
 }
 
 /// Replaces the extension to `.pdf` and returns the file name.
-pub fn file_name(path: &Path) -> Result<String> {
-  Ok(path.with_extension(PDF_EXTENSION).file_name().ok_or(err_file_name(path))?.to_string_lossy().to_string())
+pub fn file_name(path: &Path) -> String {
+  // Calling unwrap() is ok, because this function is always called for proper files.
+  // If this assumption is not valid anymore, then handle the error.
+  path.with_extension(PDF_EXTENSION).file_name().unwrap().to_string_lossy().to_string()
 }
 
 /// Returns `true` when specified path has `HTML` file extension.
@@ -119,10 +126,12 @@ pub fn has_html_extension(path: &Path) -> bool {
 pub fn init_logger(opt_log_level: Option<String>) {
   match env::var("RUST_LOG").unwrap_or("off".to_string()).as_str() {
     "error" | "warn" | "info" | "debug" | "trace" => {}
-    _ => env::set_var("RUST_LOG", "off"),
+    _ => unsafe { env::set_var("RUST_LOG", "off") },
   }
   if let Some(log_level) = opt_log_level {
-    env::set_var("RUST_LOG", log_level);
+    unsafe {
+      env::set_var("RUST_LOG", log_level);
+    }
   }
   env_logger::init();
 }
@@ -130,29 +139,4 @@ pub fn init_logger(opt_log_level: Option<String>) {
 /// Converts string to [f64] value.
 pub fn str_to_f64(s: &str) -> Result<f64> {
   s.parse::<f64>().map_err(|_| err_invalid_number(s))
-}
-
-#[cfg(test)]
-mod tests {
-  use super::*;
-
-  #[test]
-  fn test_parse_margin() {
-    assert_eq!((None, None, None, None), margin(None).unwrap());
-    assert_eq!(
-      (Some(0.39375), Some(0.39375), Some(0.39375), Some(0.39375)),
-      margin(Some("1cm 1cm 1cm 1cm".to_string())).unwrap()
-    );
-    assert_eq!(
-      (Some(0.39375), Some(0.39375), Some(0.39375), Some(0.39375)),
-      margin(Some("1cm    1cm   1cm     1cm".to_string())).unwrap()
-    );
-    assert_eq!((Some(0.39375), Some(0.39375), Some(0.39375), Some(0.39375)), margin(Some("1cm".to_string())).unwrap());
-    assert_eq!((Some(0.39375), Some(0.4725), Some(0.39375), Some(0.4725)), margin(Some("1cm 1.2cm".to_string())).unwrap());
-    assert_eq!(
-      (Some(0.39375), Some(0.7875), Some(1.18125), Some(1.575)),
-      margin(Some("1cm 2cm 3cm 4cm".to_string())).unwrap()
-    );
-    assert!(margin(Some("1cm 2cm 3cm".to_string())).is_err());
-  }
 }

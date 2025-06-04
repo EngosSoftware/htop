@@ -45,4 +45,5 @@ Options:
   -V, --version                      Print version
 "#,
   );
+  tc.tear_down(false);
 }

@@ -1,5 +1,0 @@
-error: the argument '--paper-format <FORMAT>' cannot be used with '--paper-height <PAPER_HEIGHT>'
-
-Usage: htop --paper-format <FORMAT>
-
-For more information, try '--help'.

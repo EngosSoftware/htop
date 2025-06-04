@@ -54,16 +54,15 @@ pub fn err_read_file(file_name: &str, reason: String) -> HtopError {
   HtopError::new(format!("reading file {file_name} failed with reason: {reason}"))
 }
 
+/// Creates an error with directory reading failure reason.
+pub fn err_read_dir(dir_name: &str, reason: String) -> HtopError {
+  HtopError::new(format!("reading directory {dir_name} failed with reason: {reason}"))
+}
+
 /// Creates an error when canonicalizing a path fails.
 pub fn err_canonicalize(path: &Path, reason: String) -> HtopError {
   let path = path.to_string_lossy();
   HtopError::new(format!("canonicalizing failed for path {path} with reason: {reason}"))
-}
-
-/// Creates an error when retrieving file name fails.
-pub fn err_file_name(path: &Path) -> HtopError {
-  let path = path.to_string_lossy();
-  HtopError::new(format!("retrieving file name for path {path} failed"))
 }
 
 /// Creates an error when invalid length was encountered.
