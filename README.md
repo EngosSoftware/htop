@@ -37,7 +37,8 @@
 
 HTML to PDF converter based on [headless_chrome], inspired by [html2pdf].
 
-In case of any problems while using **[htop]**, please see the [Troubleshooting](#Troubleshooting) section or [report a bug].
+In case of any problems while using [**htop**][crates-url],
+please see the [Troubleshooting](#Troubleshooting) section or [report a bug].
 
 ## Installation
 
@@ -47,63 +48,103 @@ cargo install htop
 
 ## Usage
 
-### Display shortened usage description
+Display shortened usage description:
 
 ```shell
 htop -h
 ```
 
-### Display detailed usage description
+Display detailed usage description:
 
 ```shell
 htop --help
 ```
 
-### Display the detailed description of a selected command
+Display the detailed description of a selected command:
 
 ```shell
 htop help <command>
 ```
 
-### Convert a single HTML file into a single PDF file
+## Convert HTML to PDF
+
+Convert a single HTML file into a single PDF file:
 
 ```shell
 htop single input_file.html output_file.pdf
 ```
 
-### Convert multiple HTML files into multiple PDF files
+Convert multiple HTML files into multiple PDF files:
 
 ```shell
 htop multiple input_directory output_directory
 ```
 
-### Convert a single web page into a single PDF file
+Convert a single web page into a single PDF file
 
 ```shell
-htop url https://decision-toolkit.org
+htop url https://decision-toolkit.org output-file.pdf
 ```
 
-### Convert a single HTML file into a single JPEG file
+## Convert HTML to JPEG
+
+Convert a single HTML file into a single JPEG file:
 
 ```shell
 htop --jpeg single input_file.html output_file.jpg
 ```
 
-### Convert a single HTML file into a single PNG file
+Convert multiple HTML files into multiple JPEG files:
+
+```shell
+htop --jpeg multiple input_directory output_directory
+```
+
+Convert a single web page into a single JPEG file:
+
+```shell
+htop --jpeg url https://decision-toolkit.org output-file.jpg
+```
+
+## Convert HTML to PNG
+
+Convert a single HTML file into a single PNG file:
 
 ```shell
 htop --png single input_file.html output_file.png
 ```
 
-### Convert a single HTML file into a single WEBP file
+Convert multiple HTML files into multiple PNG files:
+
+```shell
+htop --png multiple input_directory output_directory
+```
+
+Convert a single web page into a single PNG file:
+
+```shell
+htop --jpeg url https://decision-toolkit.org output-file.png
+```
+
+## Convert HTML to WebP
+
+Convert a single HTML file into a single WebP file:
 
 ```shell
 htop --webp single input_file.html output_file.webp
 ```
 
-## User guide
+Convert multiple HTML files into multiple WebP files:
 
-A detailed user guide is currently being prepared.
+```shell
+htop --webp multiple input_directory output_directory
+```
+
+Convert a single web page into a single WebP file:
+
+```shell
+htop --webp url https://decision-toolkit.org output-file.webp
+```
 
 ## Troubleshooting
 

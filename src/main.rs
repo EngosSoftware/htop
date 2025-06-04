@@ -83,7 +83,7 @@ fn main() -> Result<()> {
       // Output file name is optional, when not provided, then
       // the output file name is derived from the input file name.
       let output_file_name = if let Some(output_file) = m.get_one::<String>("OUTPUT_FILE") {
-        output_file.to_owned()
+        replace_file_extension(Path::new(output_file), screenshot_format)
       } else {
         replace_file_extension(input_file_path, screenshot_format)
       };

@@ -13,7 +13,8 @@ exclude = [
     "rustfmt.toml",
     "Taskfile.yml",
     ".github/",
-    ".gitignore"
+    ".gitignore",
+    "NOTES_AT_FUTURE_ME.md"
 ]
 
 [dependencies]
