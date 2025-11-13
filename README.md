@@ -25,7 +25,7 @@
 [coverage-badge]: https://img.shields.io/badge/Code%20coverage-98%25-green.svg
 [cc-badge]: https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg
 [cc-url]: https://github.com/EngosSoftware/htop/blob/main/CODE_OF_CONDUCT.md
-[mbh-badge]: https://img.shields.io/badge/Made_by-HUMAN-d35400.svg
+[mbh-badge]: https://img.shields.io/badge/Made_by-HUMAN-c51162.svg
 [repository-url]: https://github.com/EngosSoftware/htop
 
 [headless_chrome]: https://crates.io/crates/headless_chrome
