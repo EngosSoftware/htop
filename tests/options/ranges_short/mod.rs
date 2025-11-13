@@ -1,14 +1,9 @@
 use super::*;
-use assert_cmd::assert::OutputAssertExt;
-use assert_cmd::cargo::CommandCargoExt;
-use biff::{compare, ComparisonOptions, ComparisonResult};
-use std::fs::File;
-use std::process::Command;
 
 #[test]
 fn _0001() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-r")

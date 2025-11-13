@@ -6,7 +6,7 @@ mod single_webp;
 
 #[test]
 fn _0001() {
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = Command::new(cargo_bin!());
   cmd
     .arg("-W")
     .arg("--window-size=1200,1200cm")
@@ -20,7 +20,7 @@ fn _0001() {
 
 #[test]
 fn _0002() {
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = Command::new(cargo_bin!());
   cmd
     .arg("--png")
     .arg("--window-size=1200cm,1200")
@@ -34,7 +34,7 @@ fn _0002() {
 
 #[test]
 fn _0003() {
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = Command::new(cargo_bin!());
   cmd
     .arg("--jpeg")
     .arg("--window-size=1200:1200")

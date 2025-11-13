@@ -3,7 +3,7 @@ use super::*;
 #[test]
 fn _0001() {
   let tc = test_context!().set_up().with_suffix("cm");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
@@ -21,7 +21,7 @@ fn _0001() {
 #[test]
 fn _0002() {
   let tc = test_context!().set_up().with_suffix("mm");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
@@ -39,7 +39,7 @@ fn _0002() {
 #[test]
 fn _0003() {
   let tc = test_context!().set_up().with_suffix("Q");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
@@ -57,7 +57,7 @@ fn _0003() {
 #[test]
 fn _0004() {
   let tc = test_context!().set_up().with_suffix("in");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
@@ -75,7 +75,7 @@ fn _0004() {
 #[test]
 fn _0005() {
   let tc = test_context!().set_up().with_suffix("pc");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
@@ -93,7 +93,7 @@ fn _0005() {
 #[test]
 fn _0006() {
   let tc = test_context!().set_up().with_suffix("pt");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
@@ -111,7 +111,7 @@ fn _0006() {
 #[test]
 fn _0007() {
   let tc = test_context!().set_up().with_suffix("px");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")

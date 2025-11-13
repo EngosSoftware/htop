@@ -1,12 +1,9 @@
 use super::*;
-use assert_cmd::assert::OutputAssertExt;
-use assert_cmd::cargo::CommandCargoExt;
-use std::process::Command;
 
 #[test]
 fn _0001() {
   let tc = test_context!().set_up().with_suffix("width-height");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-v")
@@ -44,7 +41,7 @@ fn _0001() {
 #[test]
 fn _0002() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-p")
@@ -69,7 +66,7 @@ For more information, try '--help'.
 #[test]
 fn _0003() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-p")
@@ -94,7 +91,7 @@ For more information, try '--help'.
 #[test]
 fn _0004() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--paper-height=297")
@@ -118,7 +115,7 @@ For more information, try '--help'.
 #[test]
 fn _0005() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--paper-width=210")
@@ -142,7 +139,7 @@ For more information, try '--help'.
 #[test]
 fn _0006() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--paper-width=210mm")
@@ -159,7 +156,7 @@ fn _0006() {
 #[test]
 fn _0007() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--paper-width=210mm")
@@ -176,7 +173,7 @@ fn _0007() {
 #[test]
 fn _0008() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--paper-width=210mm")
@@ -193,7 +190,7 @@ fn _0008() {
 #[test]
 fn _0009() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--paper-width=2550mm")
@@ -210,7 +207,7 @@ fn _0009() {
 #[test]
 fn _0010() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--paper-width=4mm")
@@ -227,7 +224,7 @@ fn _0010() {
 #[test]
 fn _0011() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--paper-width=4a1mm")

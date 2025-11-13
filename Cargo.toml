@@ -1,6 +1,6 @@
 [package]
 name = "htop"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Dariusz Depta <depta@engos.de>"]
 description = "HTML to PDF converter"
 documentation = "https://docs.rs/htop"
@@ -18,12 +18,12 @@ exclude = [
 ]
 
 [dependencies]
-clap = { version = "4.5.39", features = ["cargo"] }
+clap = { version = "4.5.51", features = ["cargo"] }
 env_logger = "0.11.8"
 
-headless_chrome = "=1.0.17" # This version is fixed to prevent breaking changes.
-log = "0.4.25"
+headless_chrome = "1.0.18"
+log = "0.4.28"
 
 [dev-dependencies]
-assert_cmd = "2.0.17"
+assert_cmd = "2.1.1"
 biff = "0.2.0"

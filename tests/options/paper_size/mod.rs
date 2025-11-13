@@ -1,12 +1,9 @@
 use super::*;
-use assert_cmd::assert::OutputAssertExt;
-use assert_cmd::cargo::CommandCargoExt;
-use std::process::Command;
 
 #[test]
 fn _0001() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-v")
@@ -43,7 +40,7 @@ fn _0001() {
 #[test]
 fn _0002() {
   let tc = test_context!().set_up().with_suffix("invalid-size");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
@@ -60,7 +57,7 @@ fn _0002() {
 #[test]
 fn _0003() {
   let tc = test_context!().set_up().with_suffix("invalid-size");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")
@@ -77,7 +74,7 @@ fn _0003() {
 #[test]
 fn _0004() {
   let tc = test_context!().set_up().with_suffix("invalid-size");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-b")

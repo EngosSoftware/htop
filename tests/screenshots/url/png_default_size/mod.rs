@@ -3,7 +3,7 @@ use super::*;
 #[test]
 fn _0001() {
   let tc = test_context!().set_up().with_format("png");
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--png")
