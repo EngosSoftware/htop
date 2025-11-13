@@ -76,7 +76,7 @@ fn _0004() {
 #[test]
 fn _0005() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-t")
@@ -94,7 +94,7 @@ fn _0005() {
 #[test]
 fn _0006() {
   let tc = test_context!().set_up();
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("--timeout=-20")

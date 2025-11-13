@@ -1,12 +1,10 @@
-use assert_cmd::assert::OutputAssertExt;
-use assert_cmd::cargo::CommandCargoExt;
-use std::process::Command;
+use super::*;
 
 #[test]
 fn _0001() {
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = Command::new(cargo_bin!());
   cmd.assert().success().stdout(
-    r#"htop 0.3.0
+    r#"htop 0.3.1
 
 HTML to PDF converter
 

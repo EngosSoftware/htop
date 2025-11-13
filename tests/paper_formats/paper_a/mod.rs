@@ -2,7 +2,7 @@ use super::*;
 
 fn assert_paper_format(suffix: &str, paper_format: &str, htop: &str, pdfinfo: &str) {
   let tc = test_context!().set_up().with_suffix(suffix);
-  let mut cmd = Command::cargo_bin("htop").unwrap();
+  let mut cmd = tc.command();
   cmd
     .current_dir(tc.current_dir())
     .arg("-v")

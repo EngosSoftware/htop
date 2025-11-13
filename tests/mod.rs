@@ -1,5 +1,5 @@
 use assert_cmd::assert::OutputAssertExt;
-use assert_cmd::cargo::CommandCargoExt;
+use assert_cmd::cargo_bin;
 use biff::{compare, ComparisonOptions, ComparisonResult};
 use std::fs;
 use std::fs::File;
@@ -127,7 +127,7 @@ impl TestContext {
 
   /// Returns the default command.
   pub fn command(&self) -> Command {
-    Command::cargo_bin("htop").unwrap()
+    Command::new(cargo_bin!())
   }
 
   /// Returns the page size retrieved using `pdfinfo` tool.
