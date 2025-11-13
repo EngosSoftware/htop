@@ -1,5 +1,20 @@
 # Changelog
 
+## [v0.3.0](https://github.com/EngosSoftware/htop/tree/v0.3.0) (2025-06-04)
+
+[Full Changelog](https://github.com/EngosSoftware/htop/compare/v0.2.1...v0.3.0)
+
+**Closed issues:**
+
+- Convert HTML file to an image file [\#8](https://github.com/EngosSoftware/htop/issues/8)
+- Add attribute `--paper-size` [\#9](https://github.com/EngosSoftware/htop/issues/9)
+- Update README for v0.3.0 [\#13](https://github.com/EngosSoftware/htop/issues/13)
+
+**Merged pull requests:**
+
+- Added taking screenshots [\#10](https://github.com/EngosSoftware/htop/pull/10)
+- Added `--paper-size` option [\#11](https://github.com/EngosSoftware/htop/pull/11)
+
 ## [v0.2.1](https://github.com/EngosSoftware/htop/tree/v0.2.1) (2025-05-30)
 
 [Full Changelog](https://github.com/EngosSoftware/htop/compare/v0.2.0...v0.2.1)
@@ -28,4 +43,4 @@
 
 **Merged pull requests:**
 
-- Minor improvements [\#6](https://github.com/EngosSoftware/htop/pull/6) by [DariuszDepta](https://github.com/DariuszDepta)
+- Minor improvements [\#6](https://github.com/EngosSoftware/htop/pull/6)
