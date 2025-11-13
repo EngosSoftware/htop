@@ -198,4 +198,4 @@ shall be dual licensed as above, without any additional terms or conditions.
 
 ---
 
-Brought to you with 💙 by [Engos Software]
+Brought to you by [Engos Software]
